@@ -55,13 +55,10 @@ export default function HomePage() {
     [intent, dismissed, saved, interactions],
   );
 
-  const sectionIds = useMemo(() => {
-    const ids = ['intro', 'curated', 'trust', 'discovery'];
-    if (recommendationsRevealed) {
-      ids.push('matches', 'gems', 'footer');
-    }
-    return ids;
-  }, [recommendationsRevealed]);
+  const sectionIds = useMemo(
+    () => ['intro', 'curated', 'trust', 'discovery', 'matches', 'gems', 'footer'],
+    [],
+  );
 
   const { activeIndex, scrollToIndex, scrollToSectionId } = useStoryDeck(
     sectionIds,
@@ -134,6 +131,11 @@ export default function HomePage() {
     scrollToSectionId('matches');
   }, [recommendationsRevealed, scrollToSectionId]);
 
+  const handleStartDiscovery = useCallback(() => {
+    scrollToSectionId('discovery', 'smooth', { bypassLock: true });
+    setDiscoveryFocusToken((token) => token + 1);
+  }, [scrollToSectionId]);
+
   const handleViewGems = useCallback(() => {
     scrollToSectionId('gems');
   }, [scrollToSectionId]);
@@ -189,34 +191,32 @@ export default function HomePage() {
           focusToken={discoveryFocusToken}
         />
 
-        {recommendationsRevealed && (
-          <>
-            <MatchesStage
-              results={personalized}
-              hasStrongMatches={hasStrongMatches}
-              hasGemsRail
-              onBroaden={handleBroaden}
-              onChangeMood={handleChangeMood}
-              onShowGems={handleViewGems}
-              cardHandlers={cardHandlers}
-              railSource={railSources.PERSONALIZED}
-              trackRailView={trackRailView}
-              matchesSession={matchesSession}
-              scrollerRef={scrollerRef}
-            />
+        <MatchesStage
+          recommendationsRevealed={recommendationsRevealed}
+          onStartDiscovery={handleStartDiscovery}
+          results={personalized}
+          hasStrongMatches={hasStrongMatches}
+          hasGemsRail
+          onBroaden={handleBroaden}
+          onChangeMood={handleChangeMood}
+          onShowGems={handleViewGems}
+          cardHandlers={cardHandlers}
+          railSource={railSources.PERSONALIZED}
+          trackRailView={trackRailView}
+          matchesSession={matchesSession}
+          scrollerRef={scrollerRef}
+        />
 
-            <GemsStage
-              hiddenGems={hiddenGems}
-              cardHandlers={cardHandlers}
-              gemsRailSource={railSources.HIDDEN_GEMS}
-              trackRailView={trackRailView}
-              matchesSession={matchesSession}
-              scrollerRef={scrollerRef}
-            />
+        <GemsStage
+          hiddenGems={hiddenGems}
+          cardHandlers={cardHandlers}
+          gemsRailSource={railSources.HIDDEN_GEMS}
+          trackRailView={trackRailView}
+          matchesSession={matchesSession}
+          scrollerRef={scrollerRef}
+        />
 
-            <FooterSection />
-          </>
-        )}
+        <FooterSection />
       </div>
 
       <EventDetailModal

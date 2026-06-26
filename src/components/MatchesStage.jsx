@@ -2,8 +2,11 @@ import { Star } from 'lucide-react';
 import StageSection from './StageSection';
 import MatchesCarousel from './MatchesCarousel';
 import EmptyState from './EmptyState';
+import DiscoveryPromptState from './DiscoveryPromptState';
 
 export default function MatchesStage({
+  recommendationsRevealed,
+  onStartDiscovery,
   results,
   hasStrongMatches,
   hasGemsRail,
@@ -16,6 +19,27 @@ export default function MatchesStage({
   matchesSession,
   scrollerRef = null,
 }) {
+  let content;
+
+  if (!recommendationsRevealed) {
+    content = <DiscoveryPromptState onStartDiscovery={onStartDiscovery} />;
+  } else if (hasStrongMatches && results.length > 0) {
+    content = (
+      <MatchesCarousel
+        key={`picks-${matchesSession}`}
+        results={results}
+        hasGemsRail={hasGemsRail}
+        railSource={railSource}
+        trackRailView={trackRailView}
+        onChangeMood={onChangeMood}
+        onShowGems={onShowGems}
+        {...cardHandlers}
+      />
+    );
+  } else {
+    content = <EmptyState onBroaden={onBroaden} />;
+  }
+
   return (
     <StageSection
       id="matches"
@@ -28,20 +52,7 @@ export default function MatchesStage({
       className="story-stage--matches"
       scrollerRef={scrollerRef}
     >
-      {hasStrongMatches && results.length > 0 ? (
-        <MatchesCarousel
-          key={`picks-${matchesSession}`}
-          results={results}
-          hasGemsRail={hasGemsRail}
-          railSource={railSource}
-          trackRailView={trackRailView}
-          onChangeMood={onChangeMood}
-          onShowGems={onShowGems}
-          {...cardHandlers}
-        />
-      ) : (
-        <EmptyState onBroaden={onBroaden} />
-      )}
+      {content}
     </StageSection>
   );
 }

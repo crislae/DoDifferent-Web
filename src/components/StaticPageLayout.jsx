@@ -10,7 +10,7 @@ export default function StaticPageLayout({ title, children }) {
             className="header__brand"
             onClick={() => navigate(ROUTES.home)}
           >
-            DO DIFFERENT
+            Do Different
           </button>
         </div>
       </header>

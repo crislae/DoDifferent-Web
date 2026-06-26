@@ -1,3 +1,4 @@
+import { Analytics } from '@vercel/analytics/react';
 import { useAppRoute } from './hooks/useAppRoute';
 import { ROUTES } from './utils/appRoute';
 import HomePage from './pages/HomePage';
@@ -9,16 +10,28 @@ import TermsPage from './pages/TermsPage';
 export default function App() {
   const path = useAppRoute();
 
+  let page;
   switch (path) {
     case ROUTES.contact:
-      return <ContactPage />;
+      page = <ContactPage />;
+      break;
     case ROUTES.partner:
-      return <PartnerPage />;
+      page = <PartnerPage />;
+      break;
     case ROUTES.privacy:
-      return <PrivacyPage />;
+      page = <PrivacyPage />;
+      break;
     case ROUTES.terms:
-      return <TermsPage />;
+      page = <TermsPage />;
+      break;
     default:
-      return <HomePage />;
+      page = <HomePage />;
   }
+
+  return (
+    <>
+      {page}
+      <Analytics mode="production" />
+    </>
+  );
 }

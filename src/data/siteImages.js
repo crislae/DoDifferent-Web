@@ -1,6 +1,10 @@
 // Pixabay — free use under the Pixabay Content License (Kostenlose Nutzung).
 // https://pixabay.com/service/license/
-// Local files live in public/images/. Reserved unused asset: pixabay-yoga.png
+// Local files live in public/images/.
+
+export const FOOTER_YOGA_IMAGE = '/images/pixabay-yoga.png';
+export const FOOTER_YOGA_ALT =
+  'Person practicing yoga in a calm, sunlit setting with a peaceful expression';
 
 export const HALLSTATT_VILLAGE_IMAGE = '/images/pixabay-alpine-village.png';
 export const HALLSTATT_VILLAGE_ALT =
