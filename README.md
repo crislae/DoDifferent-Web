@@ -60,15 +60,17 @@ All recommendation logic runs in the browser. Results are deterministic for a gi
 
 ## Technology stack
 
-| Layer | Choice |
-|-------|--------|
-| UI | React 19 |
-| Build | Vite 8 |
-| Styling | Plain CSS (`src/styles/globals.css`) |
-| Icons | lucide-react |
-| Persistence | `localStorage`, `sessionStorage` |
-| Analytics | `@vercel/analytics` |
-| Routing | `history.pushState` + `popstate` (no React Router) |
+
+| Layer       | Choice                                             |
+| ----------- | -------------------------------------------------- |
+| UI          | React 19                                           |
+| Build       | Vite 8                                             |
+| Styling     | Plain CSS (`src/styles/globals.css`)               |
+| Icons       | lucide-react                                       |
+| Persistence | `localStorage`, `sessionStorage`                   |
+| Analytics   | `@vercel/analytics`                                |
+| Routing     | `history.pushState` + `popstate` (no React Router) |
+
 
 ---
 
@@ -117,12 +119,14 @@ Open the URL shown in the terminal (typically `http://localhost:5173`).
 
 ### Scripts
 
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start Vite dev server |
-| `npm run build` | Production build to `dist/` |
+
+| Command           | Description                      |
+| ----------------- | -------------------------------- |
+| `npm run dev`     | Start Vite dev server            |
+| `npm run build`   | Production build to `dist/`      |
 | `npm run preview` | Preview production build locally |
-| `npm run lint` | Run ESLint |
+| `npm run lint`    | Run ESLint                       |
+
 
 ---
 
@@ -143,12 +147,14 @@ Client-side routes (`/contact`, `/privacy`, `/terms`, `/partner`) require SPA fa
 
 ## Persistence
 
-| Key | Storage | Purpose |
-|-----|---------|---------|
-| `doDifferent_intent` | `localStorage` | User discovery intent (mood, when, distance, with, budget) |
-| `doDifferent_interactions` | `localStorage` | Interaction log (love, dismiss, tell_more, rail_view) |
-| `doDifferent_discovery_step` | `sessionStorage` | Current questionnaire step (per tab) |
-| `doDifferent_matches_revealed` | `sessionStorage` | Whether user has revealed recommendations this session |
+
+| Key                            | Storage          | Purpose                                                    |
+| ------------------------------ | ---------------- | ---------------------------------------------------------- |
+| `doDifferent_intent`           | `localStorage`   | User discovery intent (mood, when, distance, with, budget) |
+| `doDifferent_interactions`     | `localStorage`   | Interaction log (love, dismiss, tell_more, rail_view)      |
+| `doDifferent_discovery_step`   | `sessionStorage` | Current questionnaire step (per tab)                       |
+| `doDifferent_matches_revealed` | `sessionStorage` | Whether user has revealed recommendations this session     |
+
 
 ---
 
@@ -173,6 +179,14 @@ Client-side routes (`/contact`, `/privacy`, `/terms`, `/partner`) require SPA fa
 
 ---
 
+## Images and third-party assets
+
+Photography in `public/images/` is sourced from [Pixabay](https://pixabay.com) under the [Pixabay Content License](https://pixabay.com/service/license/). These assets are used **for MVP and demonstration purposes only** and are intended to be replaced with original or commercially licensed imagery before a production release.
+
+This does not change the repository [LICENSE](./LICENSE): application code and Do Different™ branding remain all rights reserved. Image rights are governed by Pixabay’s terms.
+
+---
+
 ## Contributing
 
 This is a personal product-lab MVP. Issues and suggestions are welcome, but there is no formal contribution process yet.
@@ -181,4 +195,6 @@ This is a personal product-lab MVP. Issues and suggestions are welcome, but ther
 
 ## License
 
-License TBD.
+All rights reserved. See [LICENSE](./LICENSE).
+
+This repository is public for portfolio and demonstration purposes only. No license is granted to use, copy, modify, or distribute the code or materials without prior written permission from Curiosity in Motion (Do Different™).

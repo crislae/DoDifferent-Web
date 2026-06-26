@@ -57,15 +57,17 @@ The MVP dataset is oriented around Munich and Bavaria, but the product model is 
 
 The homepage is a **vertical story deck** — full-viewport sections the user scrolls through (mouse wheel, keyboard, or section dots).
 
-| # | Section | Role |
-|---|---------|------|
-| 1 | **Hero** | Emotional entry — rotating inspiration lines, CTA to discovery |
-| 2 | **Curated** | Trust framing — Discover → Curate → Enjoy |
-| 3 | **Trust transition** | Bridge copy before the questionnaire |
-| 4 | **Discovery** | Five-question intent flow |
-| 5 | **Picked for you** | Primary personalized recommendations |
-| 6 | **Worth Discovering** | Secondary “hidden gems” rail |
-| 7 | **Footer** | Emotional close + lab attribution + legal links |
+
+| #   | Section               | Role                                                           |
+| --- | --------------------- | -------------------------------------------------------------- |
+| 1   | **Hero**              | Emotional entry — rotating inspiration lines, CTA to discovery |
+| 2   | **Curated**           | Trust framing — Discover → Curate → Enjoy                      |
+| 3   | **Trust transition**  | Bridge copy before the questionnaire                           |
+| 4   | **Discovery**         | Five-question intent flow                                      |
+| 5   | **Picked for you**    | Primary personalized recommendations                           |
+| 6   | **Worth Discovering** | Secondary “hidden gems” rail                                   |
+| 7   | **Footer**            | Emotional close + lab attribution + legal links                |
+
 
 Sections 5–7 are always present. **Picked for you** shows a prompt to start discovery until the user completes the questionnaire and reveals results.
 
@@ -107,16 +109,18 @@ Implemented in `src/services/matchingEngine.js`. **Fully deterministic. No AI.**
 
 Each experience event carries metadata: mood scores (0–100 per mood), tags, `when`, `distance`, `with`, and `budgetLevel`. The engine sums weighted dimensions:
 
-| Dimension | Weight | Notes |
-|-----------|--------|-------|
-| Mood | 30 | Uses per-event mood scores; `any` uses the event's strongest mood |
-| When (timing) | 25 | Exact match or partial credit for adjacent windows |
-| Distance | 20 | Ranked: nearby → 100 km → anywhere |
-| Companions | 15 | Includes pet-friendly heuristics for outdoor-tagged events |
-| Budget | 10 | Exact match or one-tier adjacency |
-| Tag preference | 8 | Nature/outdoor boost when `tagPreference === 'nature'` (not exposed in UI today) |
-| Saved boost | +5 | Events the user has loved |
-| Learning boost | up to +12 | From `learningEngine` based on past love / tell-more signals |
+
+| Dimension      | Weight    | Notes                                                                            |
+| -------------- | --------- | -------------------------------------------------------------------------------- |
+| Mood           | 30        | Uses per-event mood scores; `any` uses the event's strongest mood                |
+| When (timing)  | 25        | Exact match or partial credit for adjacent windows                               |
+| Distance       | 20        | Ranked: nearby → 100 km → anywhere                                               |
+| Companions     | 15        | Includes pet-friendly heuristics for outdoor-tagged events                       |
+| Budget         | 10        | Exact match or one-tier adjacency                                                |
+| Tag preference | 8         | Nature/outdoor boost when `tagPreference === 'nature'` (not exposed in UI today) |
+| Saved boost    | +5        | Events the user has loved                                                        |
+| Learning boost | up to +12 | From `learningEngine` based on past love / tell-more signals                     |
+
 
 ### Thresholds and limits
 
@@ -137,19 +141,21 @@ Implemented across `interactionStore.js` and `learningEngine.js`. Learning is **
 
 ### Interaction types
 
-| UI label | Type | Effect on ranking |
-|----------|------|-------------------|
-| **Love it** | `love` | +5 learning signal weight; +5 saved boost; logged with intent snapshot |
+
+| UI label         | Type        | Effect on ranking                                                          |
+| ---------------- | ----------- | -------------------------------------------------------------------------- |
+| **Love it**      | `love`      | +5 learning signal weight; +5 saved boost; logged with intent snapshot     |
 | **Tell me more** | `tell_more` | +8 learning signal weight (stronger than love); opens detail modal; logged |
-| **Not for me** | `dismiss` | Event excluded from future results in this session/browser; logged |
-| *(implicit)* | `rail_view` | Logged once per rail when carousel enters view; not used in scoring today |
+| **Not for me**   | `dismiss`   | Event excluded from future results in this session/browser; logged         |
+| *(implicit)*     | `rail_view` | Logged once per rail when carousel enters view; not used in scoring today  |
+
 
 ### How learning boosts work
 
 1. Collect unique positive signals (`love` and `tell_more`; strongest weight wins per event)
 2. For each candidate event, compute **similarity** to each positively interacted event:
-   - 50% shared tags (Jaccard-style)
-   - 50% aligned mood score profiles across six mood dimensions
+  - 50% shared tags (Jaccard-style)
+  - 50% aligned mood score profiles across six mood dimensions
 3. Boost = Σ (similarity × signal weight), capped at **12**
 4. If boost ≥ 4, a learning-based match reason may appear on the card
 
@@ -198,15 +204,21 @@ Interactions store the **intent at time of action**, enabling future analysis, t
 - **Open provider page** — external link to `providerUrl` (placeholder URLs in dataset)
 - Placeholder hero image (not yet per-event)
 
+### Imagery
+
+Homepage and footer visuals use [Pixabay](https://pixabay.com) photography under the [Pixabay Content License](https://pixabay.com/service/license/), for **MVP demonstration only**. Per-event and production imagery are planned to be replaced with licensed or original assets before launch.
+
 ### Static pages
 
-| Route | Page |
-|-------|------|
-| `/` | Homepage |
-| `/contact` | Contact email |
+
+| Route      | Page                |
+| ---------- | ------------------- |
+| `/`        | Homepage            |
+| `/contact` | Contact email       |
 | `/privacy` | Privacy placeholder |
-| `/terms` | Terms placeholder |
-| `/partner` | Partner interest |
+| `/terms`   | Terms placeholder   |
+| `/partner` | Partner interest    |
+
 
 ### Data
 
@@ -280,15 +292,25 @@ Success signals in this phase:
 
 ## Technical reference (for product readers)
 
-| Concern | Implementation |
-|---------|----------------|
-| Framework | React + Vite SPA |
-| State | React hooks in `src/state/` |
-| Ranking | `rankExperiences()` in `matchingEngine.js` |
-| Learning | `computeLearningBoost()` in `learningEngine.js` |
-| Storage | `localStorage` + `sessionStorage` |
-| Routing | `src/utils/appRoute.js` — History API |
-| Styles | Single CSS file with design tokens |
-| Deploy | Static build (`dist/`) — e.g. Vercel |
+
+| Concern   | Implementation                                  |
+| --------- | ----------------------------------------------- |
+| Framework | React + Vite SPA                                |
+| State     | React hooks in `src/state/`                     |
+| Ranking   | `rankExperiences()` in `matchingEngine.js`      |
+| Learning  | `computeLearningBoost()` in `learningEngine.js` |
+| Storage   | `localStorage` + `sessionStorage`               |
+| Routing   | `src/utils/appRoute.js` — History API           |
+| Styles    | Single CSS file with design tokens              |
+| Deploy    | Static build (`dist/`) — e.g. Vercel            |
+
 
 For setup and commands, see [README.md](./README.md).
+
+---
+
+## Legal
+
+This repository is public for demonstration purposes only. All rights reserved — see [LICENSE](./LICENSE). Do Different™ and related materials may not be used, copied, or distributed without prior written permission from Curiosity in Motion.
+
+Third-party images in `public/images/` are from Pixabay and remain subject to the [Pixabay Content License](https://pixabay.com/service/license/); they are used here for MVP purposes only.
