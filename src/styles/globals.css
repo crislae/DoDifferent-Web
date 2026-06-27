@@ -278,21 +278,34 @@ a {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 55fr 45fr;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  grid-template-rows: auto auto;
   gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
   width: 100%;
   max-width: var(--max-width);
   height: 100%;
   margin: 0 auto;
+  padding-top: var(--header-height);
 }
 
-.hero-deck__left {
+.hero-deck__copy {
+  grid-column: 1;
+  grid-row: 1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  padding-top: var(--header-height);
+}
+
+.hero-deck__action {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  align-self: start;
+  text-align: left;
 }
 
 .hero-deck__tagline {
@@ -370,11 +383,14 @@ a {
 }
 
 .hero-deck__right {
+  grid-column: 2;
+  grid-row: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100%;
   margin: 0;
+  align-self: center;
 }
 
 .hero-deck__image {
@@ -2562,106 +2578,90 @@ a {
   }
 
   .hero-deck__tagline {
-    display: none;
+    display: block;
   }
 
   .story-stage--hero {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: stretch;
-    height: 100svh;
+    height: auto;
     min-height: 100svh;
-    max-height: 100svh;
-    padding: 0 var(--stage-padding-x);
-    overflow: hidden;
+    max-height: none;
+    padding: 0 var(--stage-padding-x) clamp(1.25rem, 3vh, 2rem);
+    overflow: visible;
+  }
+
+  .story-stage--hero .hero-deck__scroll-hint {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    flex-shrink: 0;
+    display: inline-flex;
+    margin: clamp(1.25rem, 3vh, 2rem) 0 0;
+    align-self: flex-start;
   }
 
   .hero-deck {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-    flex: 0 1 auto;
-    gap: clamp(0.85rem, 2.5vh, 1.25rem);
-    max-height: calc(100svh - var(--header-height));
-    padding-top: var(--header-height);
-    overflow: hidden;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    align-items: start;
+    gap: clamp(1.75rem, 5vw, 2.75rem);
+    height: auto;
+    min-height: 0;
+    flex: 1;
+    padding-top: calc(var(--header-height) + clamp(1rem, 3vh, 1.75rem));
+  }
+
+  .hero-deck__copy,
+  .hero-deck__action {
+    grid-column: 1;
+    grid-row: auto;
   }
 
   .hero-deck__right {
-    display: block;
-    order: -1;
-    flex-shrink: 0;
-    width: 100%;
+    grid-column: 1;
+    grid-row: auto;
     height: auto;
-    margin: 0;
-  }
-
-  .hero-deck__image {
-    display: block;
     width: 100%;
-    height: clamp(8rem, 22vh, 12rem);
-    max-height: clamp(8rem, 22vh, 12rem);
-    object-fit: cover;
-    object-position: center 40%;
-    border-radius: calc(var(--radius-image) * 0.7);
-    box-shadow: var(--shadow-image);
-  }
-
-  .hero-deck__left {
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    width: 100%;
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .hero-deck__title {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 0 clamp(0.85rem, 2vh, 1.25rem);
-    font-size: clamp(2.25rem, 9vw, 3.25rem);
-    font-weight: 500;
-    line-height: 1.08;
-    letter-spacing: 0.005em;
+    align-self: stretch;
   }
 
   .hero-deck__support {
+    margin-bottom: 0;
+    font-size: clamp(1rem, 2.5vw + 0.5rem, 1.125rem);
+  }
+
+  .hero-deck__image {
     width: 100%;
-    max-width: 34rem;
-    margin: 0 0 clamp(1rem, 2.5vh, 1.5rem);
-    font-size: clamp(1.0625rem, 3.8vw, 1.3125rem);
-    line-height: 1.55;
+    height: auto;
+    max-height: min(22rem, 56vw);
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+  }
+
+  .hero-deck__title {
+    font-size: clamp(2.25rem, 7vw + 0.5rem, 3.5rem);
+    margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
   }
 
   .hero-inspiration {
-    width: 100%;
-    max-width: 34rem;
-    margin: 0;
-  }
-
-  .hero-inspiration__label {
-    margin: 0 0 clamp(0.5rem, 1.5vh, 0.75rem);
-    font-size: clamp(0.9375rem, 2.8vw, 1.0625rem);
-    line-height: 1.45;
+    margin-bottom: clamp(1.25rem, 3vh, 2rem);
   }
 
   .hero-inspiration__stage {
-    min-height: clamp(3.25rem, 9vh, 4.5rem);
+    min-height: clamp(4rem, 12vw, 5.5rem);
   }
 
   .hero-inspiration__example {
-    width: 100%;
-    max-width: 34rem;
-    font-size: clamp(1.5rem, 5.8vw, 2.25rem);
-    line-height: 1.22;
+    font-size: clamp(1.5rem, 3.5vw + 0.75rem, 2.25rem);
   }
 
   .hero-deck__cta {
-    display: none;
+    width: 100%;
+    max-width: 22rem;
+    justify-content: center;
   }
 
   /* Tablet & mobile story stages: full-viewport snap + vertical center */
@@ -2824,9 +2824,43 @@ a {
     --carousel-slide-size: min(21rem, 52vw);
   }
 
+  .hero-deck {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    grid-template-rows: auto auto;
+    align-items: center;
+    gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+
+  .hero-deck__copy {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .hero-deck__action {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .hero-deck__right {
+    grid-column: 2;
+    grid-row: 1 / -1;
+    height: auto;
+    width: 100%;
+    align-self: center;
+  }
+
   .hero-deck__image {
-    height: clamp(11rem, 30vh, 16.5rem);
-    max-height: clamp(11rem, 30vh, 16.5rem);
+    max-height: min(26rem, 48vh);
+    aspect-ratio: 4 / 5;
+    height: auto;
+  }
+
+  .hero-deck__title {
+    font-size: clamp(2.5rem, 5vw, 3.75rem);
+  }
+
+  .hero-inspiration__example {
+    font-size: clamp(1.625rem, 2.8vw, 2.125rem);
   }
 }
 
@@ -2854,6 +2888,10 @@ a {
 
   .hero-deck__scroll-hint {
     display: none;
+  }
+
+  .story-stage--hero .hero-deck__scroll-hint {
+    display: inline-flex;
   }
 }
 
@@ -2916,35 +2954,13 @@ a {
     --stage-padding-x: 1rem;
   }
 
-  .story-stage--hero {
-    padding: 0 var(--stage-padding-x);
-  }
-
   .hero-deck__image {
-    height: clamp(6.5rem, 18vh, 9rem);
-    max-height: clamp(6.5rem, 18vh, 9rem);
+    max-height: min(18rem, 72vw);
+    aspect-ratio: 3 / 2;
   }
 
-  .hero-deck {
-    gap: clamp(0.65rem, 2vh, 1rem);
-  }
-
-  .hero-deck__title {
-    font-size: clamp(2rem, 10vw, 2.5rem);
-    margin-bottom: clamp(0.75rem, 2vh, 1rem);
-  }
-
-  .hero-deck__support {
-    margin-bottom: clamp(0.85rem, 2vh, 1.25rem);
-    font-size: clamp(1rem, 4.2vw, 1.125rem);
-  }
-
-  .hero-inspiration__stage {
-    min-height: clamp(2.75rem, 8vh, 3.75rem);
-  }
-
-  .hero-inspiration__example {
-    font-size: clamp(1.375rem, 6.2vw, 1.875rem);
+  .hero-deck__cta {
+    max-width: none;
   }
 
   .story-stage:not(.story-stage--hero) {

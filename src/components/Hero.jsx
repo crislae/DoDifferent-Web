@@ -37,7 +37,7 @@ export default function Hero({ onFindExperience }) {
       aria-labelledby="hero-headline"
     >
       <div className="hero-deck">
-        <div className="hero-deck__left">
+        <div className="hero-deck__copy">
           <p className="hero-deck__tagline">Discover something worth remembering.</p>
 
           <h1 id="hero-headline" className="hero-deck__title">
@@ -48,7 +48,18 @@ export default function Hero({ onFindExperience }) {
             We help you discover extraordinary experiences that fit what you&apos;re
             looking for.
           </p>
+        </div>
 
+        <figure className="hero-deck__right">
+          <img
+            className="hero-deck__image"
+            src={GETAWAY_HILLS_IMAGE}
+            alt={GETAWAY_HILLS_ALT}
+            loading="eager"
+          />
+        </figure>
+
+        <div className="hero-deck__action">
           <div className="hero-inspiration" aria-live="polite" aria-atomic="true">
             <p className="hero-inspiration__label">What if you could...</p>
             <div className="hero-inspiration__stage">
@@ -75,15 +86,6 @@ export default function Hero({ onFindExperience }) {
             <span aria-hidden="true">→</span>
           </button>
         </div>
-
-        <figure className="hero-deck__right">
-          <img
-            className="hero-deck__image"
-            src={GETAWAY_HILLS_IMAGE}
-            alt={GETAWAY_HILLS_ALT}
-            loading="eager"
-          />
-        </figure>
       </div>
 
       <p className="hero-deck__scroll-hint">
