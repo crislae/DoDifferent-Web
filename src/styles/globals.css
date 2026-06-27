@@ -2572,7 +2572,64 @@ a {
   }
 
   .hero-deck__tagline {
-    display: block;
+    display: none;
+  }
+
+  .story-stage--hero {
+    justify-content: flex-start;
+    align-items: stretch;
+    height: auto;
+    min-height: 100svh;
+    padding: 0 clamp(1.25rem, 4vw, 1.5rem) 2rem;
+    overflow: visible;
+  }
+
+  .hero-deck {
+    grid-template-columns: 1fr;
+    gap: 0;
+    height: auto;
+  }
+
+  .hero-deck__right {
+    display: none;
+  }
+
+  .hero-deck__left {
+    padding-top: calc(var(--header-height) + 0.5rem);
+  }
+
+  .hero-deck__title {
+    font-size: clamp(2rem, 7vw, 2.75rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-deck__support {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .hero-inspiration {
+    margin-bottom: 1rem;
+  }
+
+  .hero-inspiration__label {
+    margin-bottom: 0.35rem;
+    font-size: 0.9375rem;
+    line-height: 1.4;
+  }
+
+  .hero-inspiration__stage {
+    min-height: 3.25rem;
+  }
+
+  .hero-inspiration__example {
+    font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+    line-height: 1.2;
+  }
+
+  .hero-deck__cta {
+    margin-top: 0;
   }
 }
 
@@ -2594,6 +2651,10 @@ a {
     padding: 5rem 1.25rem 4rem;
   }
 
+  .story-stage--hero {
+    padding: 0 1.25rem 2rem;
+  }
+
   .hero-deck,
   .discovery-deck {
     grid-template-columns: 1fr;
@@ -2601,13 +2662,8 @@ a {
     height: auto;
   }
 
-  .hero-deck__right {
-    order: -1;
-  }
-
-  .hero-deck__image {
-    height: auto;
-    max-height: min(20rem, 46vh);
+  .hero-deck {
+    gap: 0;
   }
 
   .curated-deck__cards {
@@ -2646,6 +2702,40 @@ a {
 }
 
 @media (max-width: 640px) {
+  .story-stage {
+    padding: 1.25rem 1rem 3.5rem;
+  }
+
+  .story-stage--hero {
+    padding: 0 1rem 1.75rem;
+  }
+
+  .hero-deck__left {
+    padding-top: calc(var(--header-height) + 0.35rem);
+  }
+
+  .hero-deck__title {
+    font-size: clamp(1.75rem, 8.5vw, 2.25rem);
+    margin-bottom: 0.65rem;
+  }
+
+  .hero-deck__support {
+    margin-bottom: 0.85rem;
+    font-size: 0.9375rem;
+  }
+
+  .hero-inspiration {
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-inspiration__stage {
+    min-height: 2.75rem;
+  }
+
+  .hero-inspiration__example {
+    font-size: clamp(1.125rem, 5vw, 1.5rem);
+  }
+
   .story-stage {
     padding: 1.25rem 1rem 3.5rem;
   }
