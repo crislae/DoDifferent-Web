@@ -46,7 +46,7 @@ export default function MatchesStage({
       title="Picked for you"
       titleId="matches-title"
       icon={Star}
-      showCue
+      showCue={false}
       nextTarget="gems"
       ariaLabel="Your matched experiences"
       className="story-stage--matches"

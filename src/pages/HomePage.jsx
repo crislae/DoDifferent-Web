@@ -7,7 +7,6 @@ import MatchesStage from '../components/MatchesStage';
 import GemsStage from '../components/GemsStage';
 import TrustSection from '../components/TrustSection';
 import FooterSection from '../components/FooterSection';
-import StoryPagination from '../components/StoryPagination';
 import EventDetailModal from '../components/EventDetailModal';
 import { events } from '../data/events';
 import { rankExperiences } from '../services/matchingEngine';
@@ -60,7 +59,7 @@ export default function HomePage() {
     [],
   );
 
-  const { activeIndex, scrollToIndex, scrollToSectionId } = useStoryDeck(
+  const { scrollToIndex, scrollToSectionId } = useStoryDeck(
     sectionIds,
     scrollerRef,
   );
@@ -104,11 +103,6 @@ export default function HomePage() {
     },
     [queueSectionNavigation],
   );
-
-  const handleFindExperience = useCallback(() => {
-    scrollToSectionId('discovery', 'smooth', { bypassLock: true });
-    setDiscoveryFocusToken((token) => token + 1);
-  }, [scrollToSectionId]);
 
   const handleRestartDiscovery = useCallback(() => {
     resetToDiscovery();
@@ -170,16 +164,10 @@ export default function HomePage() {
     <div className="page">
       <Header scrollerRef={scrollerRef} />
 
-      <StoryPagination
-        sections={sectionIds}
-        activeIndex={activeIndex}
-        onSelect={scrollToIndex}
-      />
-
       <div className="story-scroll" ref={scrollerRef}>
-        <Hero onFindExperience={handleFindExperience} />
+        <Hero />
         <CuratedSection />
-        <TrustSection scrollerRef={scrollerRef} />
+        <TrustSection />
 
         <DiscoveryPanel
           key={discoverySession}
@@ -213,7 +201,6 @@ export default function HomePage() {
           gemsRailSource={railSources.HIDDEN_GEMS}
           trackRailView={trackRailView}
           matchesSession={matchesSession}
-          scrollerRef={scrollerRef}
         />
 
         <FooterSection />

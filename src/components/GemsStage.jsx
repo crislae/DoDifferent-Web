@@ -1,4 +1,3 @@
-import ScrollCue from './ScrollCue';
 import GemsCarousel from './GemsCarousel';
 
 export default function GemsStage({
@@ -7,7 +6,6 @@ export default function GemsStage({
   gemsRailSource,
   trackRailView,
   matchesSession,
-  scrollerRef = null,
 }) {
   const hasGems = hiddenGems.length > 0;
 
@@ -44,8 +42,6 @@ export default function GemsStage({
           </div>
         )}
       </div>
-
-      <ScrollCue targetId="footer" label="Continue to footer" scrollerRef={scrollerRef} />
     </section>
   );
 }

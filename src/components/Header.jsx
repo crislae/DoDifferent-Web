@@ -11,7 +11,6 @@ export default function Header({ scrollerRef = null }) {
       <div className="header__inner">
         <a href="#intro" className="header__brand-group" onClick={handleIntroScroll}>
           <span className="header__brand">Do Different</span>
-          <span className="header__tagline">Discover something worth remembering.</span>
         </a>
 
         <nav className="header__nav" aria-label="Main">

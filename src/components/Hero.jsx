@@ -13,7 +13,7 @@ const INSPIRATIONS = [
 const PHRASE_MS = 4000;
 const FADE_MS = 400;
 
-export default function Hero({ onFindExperience }) {
+export default function Hero() {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -76,22 +76,8 @@ export default function Hero({ onFindExperience }) {
               ))}
             </div>
           </div>
-
-          <button
-            type="button"
-            className="btn-primary hero-deck__cta"
-            onClick={onFindExperience}
-          >
-            Find my next experience
-            <span aria-hidden="true">→</span>
-          </button>
         </div>
       </div>
-
-      <p className="hero-deck__scroll-hint">
-        <span className="hero-deck__scroll-icon" aria-hidden="true" />
-        Scroll to explore
-      </p>
     </section>
   );
 }

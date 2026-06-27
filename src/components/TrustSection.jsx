@@ -1,6 +1,4 @@
-import ScrollCue from './ScrollCue';
-
-export default function TrustSection({ scrollerRef = null }) {
+export default function TrustSection() {
   return (
     <section
       id="trust"
@@ -14,11 +12,6 @@ export default function TrustSection({ scrollerRef = null }) {
         <p className="transition-deck__sub">
           Let&apos;s discover something worth remembering.
         </p>
-        <ScrollCue
-          targetId="discovery"
-          label="Continue to discovery"
-          scrollerRef={scrollerRef}
-        />
       </div>
     </section>
   );
