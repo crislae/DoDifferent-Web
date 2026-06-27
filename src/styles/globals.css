@@ -2517,18 +2517,18 @@ a {
 
 @media (max-width: 1199px) {
   :root {
-    --header-height: 3.75rem;
+    --header-height: 3rem;
   }
 
   .header {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
   }
 
   .header__inner {
     min-height: auto;
-    align-items: center;
-    gap: 0.75rem;
+    justify-content: flex-start;
+    gap: 0;
   }
 
   .header__brand-group {
@@ -2551,14 +2551,24 @@ a {
   }
 
   .header__nav {
-    flex-shrink: 0;
-    align-self: center;
+    display: none;
   }
 
-  .btn-primary--header {
-    height: 44px;
-    padding: 0 1.1rem;
-    font-size: 0.875rem;
+  .story-scroll {
+    scroll-snap-type: none;
+  }
+
+  .story-stage,
+  .story-stage--matches,
+  .story-stage--gems,
+  .story-stage--discovery,
+  .story-stage--footer {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
+  }
+
+  .story-pagination {
+    display: none;
   }
 
   .hero-deck__tagline {
@@ -2567,13 +2577,15 @@ a {
 }
 
 @media (max-width: 480px) {
+  :root {
+    --header-height: 2.75rem;
+  }
+
   .header {
     padding-left: 1rem;
     padding-right: 1rem;
-  }
-
-  .header__inner {
-    gap: 0.5rem;
+    padding-top: 0.3125rem;
+    padding-bottom: 0.3125rem;
   }
 }
 
