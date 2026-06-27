@@ -13,7 +13,7 @@ const INSPIRATIONS = [
 const PHRASE_MS = 4000;
 const FADE_MS = 400;
 
-export default function Hero() {
+export default function Hero({ onFindExperience }) {
   const [index, setIndex] = useState(0);
   const [visible, setVisible] = useState(true);
 
@@ -37,20 +37,7 @@ export default function Hero() {
       aria-labelledby="hero-headline"
     >
       <div className="hero-deck">
-        <div className="hero-deck__copy">
-          <p className="hero-deck__tagline">Discover something worth remembering.</p>
-
-          <h1 id="hero-headline" className="hero-deck__title">
-            Not sure what to do different this weekend?
-          </h1>
-
-          <p className="hero-deck__support">
-            We help you discover extraordinary experiences that fit what you&apos;re
-            looking for.
-          </p>
-        </div>
-
-        <figure className="hero-deck__right">
+        <figure className="hero-deck__banner">
           <img
             className="hero-deck__image"
             src={GETAWAY_HILLS_IMAGE}
@@ -59,24 +46,40 @@ export default function Hero() {
           />
         </figure>
 
-        <div className="hero-deck__action">
-          <div className="hero-inspiration" aria-live="polite" aria-atomic="true">
-            <p className="hero-inspiration__label">What if you could...</p>
-            <div className="hero-inspiration__stage">
-              {INSPIRATIONS.map((example, exampleIndex) => (
-                <p
-                  key={example}
-                  className={`hero-inspiration__example${
-                    exampleIndex === index && visible ? ' hero-inspiration__example--visible' : ''
-                  }`}
-                  aria-hidden={exampleIndex !== index}
-                >
-                  {example}
-                </p>
-              ))}
-            </div>
+        <h1 id="hero-headline" className="hero-deck__title">
+          Not sure what to do different this weekend?
+        </h1>
+
+        <p className="hero-deck__support">
+          We help you discover extraordinary experiences that fit what you&apos;re
+          looking for.
+        </p>
+
+        <div className="hero-inspiration" aria-live="polite" aria-atomic="true">
+          <p className="hero-inspiration__label">What if you could...</p>
+          <div className="hero-inspiration__stage">
+            {INSPIRATIONS.map((example, exampleIndex) => (
+              <p
+                key={example}
+                className={`hero-inspiration__example${
+                  exampleIndex === index && visible ? ' hero-inspiration__example--visible' : ''
+                }`}
+                aria-hidden={exampleIndex !== index}
+              >
+                {example}
+              </p>
+            ))}
           </div>
         </div>
+
+        <button
+          type="button"
+          className="btn-primary hero-deck__cta"
+          onClick={onFindExperience}
+        >
+          Find my next experience
+          <span aria-hidden="true">→</span>
+        </button>
       </div>
     </section>
   );
