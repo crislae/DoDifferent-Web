@@ -38,6 +38,8 @@ export default function Hero({ onFindExperience }) {
     >
       <div className="hero-deck">
         <div className="hero-deck__left">
+          <p className="hero-deck__tagline">Discover something worth remembering.</p>
+
           <h1 id="hero-headline" className="hero-deck__title">
             Not sure what to do different this weekend?
           </h1>
