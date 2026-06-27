@@ -95,8 +95,7 @@ a {
   height: 100svh;
   overflow-x: hidden;
   overflow-y: auto;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-y: contain;
 }
@@ -108,17 +107,12 @@ a {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  height: 100svh;
   min-height: 100svh;
   padding: var(--section-padding-y) clamp(1.5rem, 4vw, 3rem);
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   overflow: hidden;
 }
 
 .story-stage--matches {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   animation: recommendations-reveal 0.65s ease both;
   overflow: visible;
 }
@@ -136,8 +130,6 @@ a {
 }
 
 .story-stage--gems {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   overflow: visible;
 }
 
@@ -154,8 +146,6 @@ a {
 }
 
 .story-stage--discovery {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   overflow: visible;
 }
 
@@ -442,6 +432,7 @@ a {
 
 .story-stage--curated {
   background: var(--color-bg);
+  justify-content: center;
 }
 
 .curated-deck {
@@ -451,7 +442,7 @@ a {
   justify-content: center;
   width: 100%;
   max-width: var(--max-width);
-  height: 100%;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -644,6 +635,7 @@ a {
 
 .story-stage--transition {
   background: var(--color-bg);
+  justify-content: center;
 }
 
 .transition-deck {
@@ -669,7 +661,7 @@ a {
 }
 
 .transition-deck__sub {
-  margin: 0 0 2rem;
+  margin: 0;
   font-size: 1.125rem;
   line-height: 1.6;
   color: var(--color-text-muted);
@@ -679,8 +671,7 @@ a {
 
 .story-stage--discovery {
   background: var(--color-discovery-bg);
-  padding-top: clamp(4.25rem, 8vh, 5.5rem);
-  padding-bottom: clamp(3rem, 6vh, 4.5rem);
+  justify-content: center;
 }
 
 .discovery-deck {
@@ -690,7 +681,7 @@ a {
   align-items: center;
   width: 100%;
   max-width: var(--max-width);
-  height: 100%;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -2229,8 +2220,6 @@ a {
 /* Deck footer */
 
 .story-stage--footer {
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
   justify-content: flex-start;
   height: auto;
   min-height: 100svh;
@@ -2504,35 +2493,27 @@ a {
 
 /* Responsive */
 
-@media (max-width: 1200px) {
-  .curated-deck__card-media {
-    height: clamp(10rem, 24vh, 13rem);
-  }
-}
-
+/* Mobile / tablet header (desktop ≥1200px unchanged) */
 @media (max-width: 1199px) {
   :root {
-    --header-height: 3rem;
+    --header-height: 3.25rem;
   }
 
   .header {
-    padding-top: 0.375rem;
-    padding-bottom: 0.375rem;
-    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+    min-height: var(--header-height);
+    padding: max(0.5rem, env(safe-area-inset-top, 0px))
+      max(1rem, env(safe-area-inset-right, 0px)) 0.5rem
+      max(1rem, env(safe-area-inset-left, 0px));
   }
 
   .header__inner {
-    min-height: auto;
+    min-height: calc(var(--header-height) - 1rem);
     justify-content: flex-start;
     gap: 0;
   }
 
   .header__brand-group {
     flex: 0 1 auto;
-    flex-direction: row;
-    align-items: center;
-    gap: 0;
     max-width: none;
     padding-left: 0.75rem;
   }
@@ -2542,7 +2523,7 @@ a {
   }
 
   .header__brand {
-    font-size: clamp(1.0625rem, 2.5vw + 0.5rem, 1.25rem);
+    font-size: clamp(1rem, 2.8vw, 1.1875rem);
     line-height: 1.1;
     white-space: nowrap;
   }
@@ -2551,388 +2532,67 @@ a {
     display: none;
   }
 
-  :root {
-    --stage-padding-x: clamp(1.25rem, 4vw, 2.25rem);
-  }
-
-  .story-scroll {
-    scroll-snap-type: y mandatory;
-  }
-
   .story-pagination {
     display: none;
   }
 
-  .hero-deck__tagline {
-    font-size: clamp(1.1875rem, 3.5vw, 1.375rem);
-    margin-bottom: clamp(0.75rem, 2vh, 1rem);
-  }
-
-  .story-stage--hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    height: auto;
-    min-height: 100svh;
-    max-height: none;
-    padding: 0 var(--stage-padding-x) clamp(1.25rem, 3vh, 2rem);
-    overflow: visible;
-  }
-
+  /* Hero composition */
   .hero-deck {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
     align-items: start;
-    gap: clamp(1.75rem, 5vw, 2.75rem);
-    height: auto;
-    min-height: 0;
-    flex: 1;
-    padding-top: calc(var(--header-height) + clamp(1rem, 3vh, 1.75rem));
-  }
-
-  .hero-deck__copy,
-  .hero-deck__action {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .hero-deck__right {
-    grid-column: 1;
-    grid-row: auto;
-    height: auto;
-    width: 100%;
-    align-self: stretch;
-  }
-
-  .hero-deck__support {
-    margin-bottom: 0;
-    font-size: clamp(1rem, 2.5vw + 0.5rem, 1.125rem);
-  }
-
-  .hero-deck__image {
-    width: 100%;
-    height: auto;
-    max-height: min(22rem, 56vw);
-    aspect-ratio: 5 / 4;
-    object-fit: cover;
-  }
-
-  .hero-deck__title {
-    font-size: clamp(2.25rem, 7vw + 0.5rem, 3.5rem);
-    margin-bottom: clamp(0.75rem, 2vh, 1.25rem);
-  }
-
-  .hero-inspiration {
-    margin-bottom: 0;
-  }
-
-  .hero-inspiration__stage {
-    min-height: clamp(4rem, 12vw, 5.5rem);
-  }
-
-  .hero-inspiration__example {
-    font-size: clamp(1.5rem, 3.5vw + 0.75rem, 2.25rem);
-  }
-
-  /* Tablet & mobile story stages */
-  .story-stage:not(.story-stage--hero):not(.story-stage--curated):not(.story-stage--transition) {
-    height: 100svh;
-    min-height: 100svh;
-    max-height: 100svh;
-    justify-content: center;
-    padding: calc(var(--header-height) + clamp(1rem, 3vh, 1.75rem)) var(--stage-padding-x)
-      clamp(1rem, 3vh, 1.75rem);
-    overflow: hidden;
-  }
-
-  .story-stage--curated,
-  .story-stage--transition {
-    height: auto;
-    min-height: 100svh;
-    max-height: none;
-    overflow: visible;
-    justify-content: flex-start;
-    padding: calc(var(--header-height) + clamp(1rem, 3vh, 1.75rem)) var(--stage-padding-x)
-      clamp(1.5rem, 3vh, 2.5rem);
-  }
-
-  .curated-deck {
-    height: auto;
-    justify-content: flex-start;
-  }
-
-  .curated-deck__card-media {
-    display: none;
-  }
-
-  .curated-deck__card-content {
-    padding: 1.75rem 1.25rem 1.5rem;
-  }
-
-  .curated-deck__card-badge {
-    position: relative;
-    top: auto;
-    left: auto;
-    transform: none;
-    margin: 0 auto 1rem;
-  }
-
-  .discovery-deck__media {
-    display: none;
-  }
-
-  .discovery-deck__sub {
-    margin-bottom: 0;
-  }
-
-  .story-stage--discovery,
-  .story-stage--matches,
-  .story-stage--gems {
-    overflow: visible;
-  }
-
-  .story-stage--footer {
-    height: auto;
-    min-height: 100svh;
-    max-height: none;
-    overflow: visible;
-  }
-
-  .curated-deck,
-  .transition-deck,
-  .discovery-deck {
-    width: 100%;
-    max-width: var(--max-width);
-    margin: 0 auto;
-  }
-
-  .story-stage__inner {
-    width: 100%;
-    max-width: var(--max-width);
-    text-align: left;
-  }
-
-  .story-stage--matches .story-stage__inner,
-  .story-stage--gems .story-stage__inner {
-    max-width: var(--max-width);
-  }
-
-  .worth-discovering {
-    width: 100%;
-    max-width: var(--max-width);
-  }
-
-  /* Curated: two columns on tablet */
-  .curated-deck__cards {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: clamp(1rem, 2vw, 1.25rem);
-  }
-
-  .curated-deck__header {
-    margin-bottom: clamp(1.5rem, 3vh, 2rem);
-  }
-
-  .curated-deck__card:nth-child(3) {
-    grid-column: 1 / -1;
-    max-width: min(100%, 28rem);
-    justify-self: center;
-  }
-
-  /* Discovery: single column */
-  .discovery-deck {
-    grid-template-columns: 1fr;
-    gap: clamp(1.5rem, 4vh, 2.5rem);
-    height: auto;
-  }
-
-  .discovery-deck__panel {
-    padding: 0;
-  }
-
-  .discovery-deck__panel .discovery__interaction {
-    min-height: 12rem;
-  }
-
-  /* Carousels */
-  .matches-carousel {
-    --carousel-slide-size: min(19rem, 78vw);
-  }
-
-  /* Modal: stacked on tablet */
-  .modal__panel {
-    grid-template-columns: 1fr;
-    max-height: 92svh;
-  }
-
-  .modal__content {
-    max-height: none;
-  }
-
-  .modal__image {
-    min-height: min(14rem, 28vh);
-  }
-
-  .modal__meta {
-    grid-template-columns: 1fr;
-  }
-
-  .modal__actions {
-    flex-direction: column;
-    align-items: stretch;
-  }
-
-  .modal__cta-primary,
-  .modal__cta-secondary {
-    width: 100%;
-  }
-
-  /* Static pages */
-  .static-page__main {
-    padding: 1.75rem clamp(1.25rem, 4vw, 2rem) 3rem;
-  }
-
-  .static-page__title {
-    font-size: clamp(1.75rem, 5vw, 2.5rem);
-  }
-
-  /* Footer */
-  .deck-footer__hero,
-  .deck-footer__hero-overlay {
-    min-height: clamp(14rem, 36vh, 20rem);
-  }
-
-  /* Empty states */
-  .empty-state {
-    padding: clamp(2.5rem, 6vh, 3.5rem) clamp(1.25rem, 4vw, 2rem);
-  }
-
-  .empty-state__title {
-    font-size: clamp(1.5rem, 4vw, 1.75rem);
-  }
-
-  /* Transition */
-  .transition-deck__sub {
-    margin-bottom: clamp(1.5rem, 4vh, 2rem);
-  }
-
-  .worth-discovering__header {
-    margin-bottom: clamp(1.25rem, 3vh, 1.75rem);
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1199px) {
-  .matches-carousel {
-    --carousel-slide-size: min(21rem, 52vw);
-  }
-
-  .hero-deck {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
-    grid-template-rows: auto auto;
-    align-items: center;
-    gap: clamp(1.5rem, 3vw, 2.5rem);
+    row-gap: clamp(1.35rem, 2.7vw, 2.65rem);
   }
 
   .hero-deck__copy {
+    display: contents;
+  }
+
+  .hero-deck__tagline {
+    display: none;
+  }
+
+  .hero-deck__title {
     grid-column: 1;
     grid-row: 1;
+    align-self: start;
+  }
+
+  .hero-deck__support {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    margin-bottom: 0;
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
   }
 
   .hero-deck__action {
-    grid-column: 1;
-    grid-row: 2;
+    grid-column: 1 / -1;
+    grid-row: 3;
+    margin-top: 0;
   }
 
   .hero-deck__right {
     grid-column: 2;
-    grid-row: 1 / -1;
+    grid-row: 1;
+    align-self: start;
     height: auto;
-    width: 100%;
-    align-self: center;
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .hero-deck__image {
-    max-height: min(26rem, 48vh);
-    aspect-ratio: 4 / 5;
+    width: 100%;
     height: auto;
-  }
-
-  .hero-deck__title {
-    font-size: clamp(2.5rem, 5vw, 3.75rem);
-  }
-
-  .hero-inspiration__example {
-    font-size: clamp(1.625rem, 2.8vw, 2.125rem);
+    max-height: 21rem;
+    object-fit: cover;
   }
 }
 
-@media (max-width: 480px) {
-  :root {
-    --header-height: 2.75rem;
-  }
 
-  .header {
-    padding-left: max(1rem, env(safe-area-inset-left, 0px));
-    padding-right: max(1rem, env(safe-area-inset-right, 0px));
-    padding-top: 0.3125rem;
-    padding-bottom: 0.3125rem;
-  }
-}
 
-@media (max-width: 1023px) {
-  .header__link {
-    display: none;
-  }
-}
 
-@media (max-width: 767px) {
-  :root {
-    --stage-padding-x: 1.25rem;
-  }
 
-  .story-stage:not(.story-stage--hero):not(.story-stage--curated):not(.story-stage--transition) {
-    padding-top: calc(var(--header-height) + 1rem);
-    padding-bottom: 1rem;
-  }
 
-  .story-stage--curated,
-  .story-stage--transition {
-    padding-top: calc(var(--header-height) + 1rem);
-    padding-bottom: 1.25rem;
-  }
-
-  .curated-deck__cards {
-    grid-template-columns: 1fr;
-    gap: clamp(0.85rem, 2.5vh, 1.15rem);
-  }
-
-  .curated-deck__card:nth-child(3) {
-    grid-column: auto;
-    max-width: none;
-    justify-self: stretch;
-  }
-
-  .curated-deck__header {
-    margin-bottom: clamp(1.25rem, 3vh, 1.5rem);
-  }
-
-  .matches-carousel {
-    --carousel-slide-size: min(18rem, 84vw);
-  }
-
-  .discovery-deck__title {
-    font-size: clamp(1.75rem, 6vw, 2.25rem);
-  }
-
-  .discovery-deck__sub {
-    font-size: 1rem;
-  }
-
-  .deck-footer__links {
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-}
 
 @media (min-width: 1200px) {
   .story-stage__inner {
@@ -2950,81 +2610,3 @@ a {
   }
 }
 
-@media (max-width: 640px) {
-  :root {
-    --stage-padding-x: 1rem;
-  }
-
-  .hero-deck__image {
-    max-height: min(18rem, 72vw);
-    aspect-ratio: 3 / 2;
-  }
-
-  .story-stage:not(.story-stage--hero):not(.story-stage--curated):not(.story-stage--transition) {
-    padding-top: calc(var(--header-height) + 0.85rem);
-    padding-bottom: 0.85rem;
-  }
-
-  .story-stage--discovery {
-    padding-top: calc(var(--header-height) + 1rem);
-    padding-bottom: 1rem;
-  }
-
-  .discovery-deck__sub {
-    margin-bottom: 0;
-  }
-
-  .discovery-deck__panel {
-    padding: 0;
-  }
-
-  .discovery-deck__panel .discovery__question {
-    margin-bottom: 1.15rem;
-  }
-
-  .discovery__options {
-    gap: 0.65rem;
-  }
-
-  .discovery__option {
-    flex: 1 1 100%;
-    width: 100%;
-    min-width: 100%;
-    padding: 0.9rem 1.1rem;
-  }
-
-  .event-card__actions {
-    flex-direction: column;
-  }
-
-  .modal {
-    align-items: stretch;
-    padding: 0;
-  }
-
-  .modal__panel {
-    max-width: 100%;
-    max-height: 100svh;
-    height: 100%;
-    border-radius: 0;
-    animation: modal-panel-in 0.34s ease both;
-  }
-
-  .modal__close {
-    top: 1rem;
-    right: 1rem;
-  }
-
-  .modal__image {
-    min-height: min(16rem, 34vh);
-  }
-
-  .modal__content {
-    flex: 1;
-    padding: 1.5rem 1.25rem 2rem;
-  }
-
-  .modal__header {
-    padding-right: 2.5rem;
-  }
-}

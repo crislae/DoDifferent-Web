@@ -77,7 +77,7 @@ export default function HomePage() {
     if (index < 0 || !target) return;
 
     pendingNavigationRef.current = null;
-    scrollToIndex(index, 'smooth', { bypassLock: true });
+    scrollToIndex(index, 'smooth');
   }, [sectionIds, scrollToIndex]);
 
   // Matches stage mounts after first reveal — scroll once the section exists in the DOM.
@@ -89,7 +89,7 @@ export default function HomePage() {
     if (index < 0 || !matchesSection) return;
 
     pendingMatchesScrollRef.current = false;
-    scrollToIndex(index, 'smooth', { bypassLock: true });
+    scrollToIndex(index, 'smooth');
   }, [recommendationsRevealed, sectionIds, scrollToIndex, matchesSession]);
 
   const resetToDiscovery = useCallback(
@@ -126,7 +126,7 @@ export default function HomePage() {
   }, [recommendationsRevealed, scrollToSectionId]);
 
   const handleStartDiscovery = useCallback(() => {
-    scrollToSectionId('discovery', 'smooth', { bypassLock: true });
+    scrollToSectionId('discovery', 'smooth');
     setDiscoveryFocusToken((token) => token + 1);
   }, [scrollToSectionId]);
 
