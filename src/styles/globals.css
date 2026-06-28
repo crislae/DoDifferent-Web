@@ -179,32 +179,102 @@ a {
   text-align: center;
 }
 
-.matches-stage__title-row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-}
-
-.matches-stage__icon {
-  display: inline-flex;
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-  width: 2.35rem;
-  height: 2.35rem;
-  color: var(--color-accent);
-  background: var(--color-accent-soft);
-  border-radius: 50%;
-}
-
 .matches-stage__header .story-stage__title {
-  margin: 0 0 clamp(1rem, 2.5vh, 1.5rem);
-  text-align: left;
+  margin: 0 0 clamp(0.65rem, 1.75vh, 1rem);
+  text-align: center;
 }
 
 .matches-stage__body {
   width: 100%;
+}
+
+/* Picked for you — tighter cards so carousel nav stays in view */
+.matches-stage .matches-carousel__scroller {
+  padding: 0.25rem 0 0.35rem;
+}
+
+.matches-stage .matches-carousel__slide-inner .event-card,
+.matches-stage .matches-carousel__slide-inner .picky-mood-card {
+  height: auto;
+}
+
+.matches-stage .event-card__body {
+  padding: 1rem 1.1rem 0.95rem;
+  gap: 0;
+}
+
+.matches-stage .event-card__title {
+  margin: 0 0 0.4rem;
+  font-size: 1.2rem;
+  line-height: 1.25;
+}
+
+.matches-stage .event-card__hook {
+  margin: 0 0 0.6rem;
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.matches-stage .event-card__logistics {
+  margin: 0 0 0.55rem;
+  font-size: 0.78rem;
+}
+
+.matches-stage .event-card__tags {
+  margin: 0 0 0.7rem;
+  gap: 0.25rem;
+}
+
+.matches-stage .event-card__thought {
+  padding: 0.65rem 0 0;
+  margin-bottom: 0.75rem;
+}
+
+.matches-stage .event-card__thought-label {
+  margin-bottom: 0.35rem;
+  font-size: 0.7rem;
+}
+
+.matches-stage .event-card__thought-text {
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.matches-stage .event-card__thought-text + .event-card__thought-text {
+  margin-top: 0.2rem;
+}
+
+.matches-stage .event-card__actions {
+  gap: 0.35rem;
+}
+
+.matches-stage .event-card__btn {
+  padding: 0.5rem 0.6rem;
+  font-size: 0.78rem;
+}
+
+.matches-stage .picky-mood-card {
+  padding: 1.2rem 1.1rem;
+}
+
+.matches-stage .picky-mood-card__title {
+  margin-bottom: 0.65rem;
+  font-size: 1.2rem;
+}
+
+.matches-stage .picky-mood-card__body {
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.matches-stage .picky-mood-card__actions {
+  gap: 0.45rem;
+}
+
+.matches-stage .picky-mood-card__btn {
+  padding: 0.7rem 0.9rem;
+  font-size: 0.85rem;
 }
 
 .gems-stage {
@@ -1809,6 +1879,46 @@ a {
 .carousel-nav__dot:focus-visible {
   outline: 1.5px solid var(--color-accent);
   outline-offset: 2px;
+}
+
+.carousel-nav--comfortable {
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+}
+
+.carousel-nav--comfortable .carousel-nav__btn {
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+}
+
+.carousel-nav--comfortable .carousel-nav__btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.carousel-nav--comfortable .carousel-nav__btn:hover:not(:disabled) {
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
+}
+
+.carousel-nav--comfortable .carousel-nav__dots {
+  gap: 0.4rem;
+  padding: 0 0.25rem;
+}
+
+.carousel-nav--comfortable .carousel-nav__dot {
+  width: 0.35rem;
+  height: 0.35rem;
+}
+
+.carousel-nav--comfortable .carousel-nav__dot--active {
+  width: 1.125rem;
 }
 
 .picky-mood-card {

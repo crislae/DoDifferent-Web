@@ -172,6 +172,19 @@
     --carousel-slide-size: min(19rem, 88vw);
   }
 
+  .matches-stage .matches-carousel__scroller {
+    padding: 0.15rem 0 0.25rem;
+  }
+
+  .carousel-nav--comfortable {
+    margin-top: 0.5rem;
+  }
+
+  .carousel-nav--comfortable .carousel-nav__btn {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
   .carousel-nav {
     gap: 0.4rem;
     margin-top: 0.35rem;

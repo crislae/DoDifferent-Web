@@ -7,6 +7,7 @@ export default function CarouselNav({
   onPrev,
   onNext,
   labelPrefix = 'Pick',
+  className = '',
 }) {
   if (count <= 1) return null;
 
@@ -14,7 +15,10 @@ export default function CarouselNav({
   const canNext = activeIndex < count - 1;
 
   return (
-    <nav className="carousel-nav" aria-label="Carousel navigation">
+    <nav
+      className={`carousel-nav${className ? ` ${className}` : ''}`}
+      aria-label="Carousel navigation"
+    >
       <button
         type="button"
         className="carousel-nav__btn"

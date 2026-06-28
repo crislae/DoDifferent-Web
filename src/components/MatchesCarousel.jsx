@@ -215,6 +215,7 @@ export default function MatchesCarousel({
         </div>
       </div>
       <CarouselNav
+        className="carousel-nav--comfortable"
         count={realCount}
         activeIndex={activeRealIndex}
         onSelect={handleSelect}

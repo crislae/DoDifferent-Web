@@ -1,4 +1,3 @@
-import { Star } from 'lucide-react';
 import MatchesCarousel from './MatchesCarousel';
 import EmptyState from './EmptyState';
 import DiscoveryPromptState from './DiscoveryPromptState';
@@ -49,14 +48,9 @@ export default function MatchesStage({
     >
       <div className="matches-stage slide-shell">
         <header id="matches-head" className="matches-stage__header">
-          <div className="matches-stage__title-row">
-            <div className="matches-stage__icon" aria-hidden="true">
-              <Star size={22} strokeWidth={1.5} />
-            </div>
-            <h2 id="matches-title" className="story-stage__title">
-              Picked for you
-            </h2>
-          </div>
+          <h2 id="matches-title" className="story-stage__title">
+            Picked for you
+          </h2>
         </header>
 
         <div className="matches-stage__body">{content}</div>
