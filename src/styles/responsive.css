@@ -138,7 +138,8 @@
   }
 
   .discovery-deck__media {
-    display: none;
+    display: flex;
+    max-height: min(7rem, 20vh);
   }
 
   .curated-deck__body {
@@ -251,8 +252,8 @@
   }
 
   .deck-footer {
-    min-height: calc(100svh - 2 * var(--slide-pad-block));
-    gap: clamp(1rem, 2vh, 1.35rem);
+    min-height: calc(var(--slide-visible-height) - 2 * var(--slide-pad-block));
+    gap: clamp(0.85rem, 1.75vh, 1.15rem);
   }
 
   .deck-footer__hero {
@@ -265,13 +266,14 @@
       clamp(1.15rem, 3.5vh, 1.5rem);
   }
 
+  .deck-footer__legal {
+    gap: 0.3rem;
+    padding-bottom: max(0.65rem, env(safe-area-inset-bottom, 0px));
+  }
+
   .deck-footer__legal .deck-footer__links {
     flex-direction: column;
     gap: 0.45rem;
-  }
-
-  .deck-footer__legal {
-    gap: 0.4rem;
   }
 
   .empty-state {

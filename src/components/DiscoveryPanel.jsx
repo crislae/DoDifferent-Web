@@ -138,6 +138,7 @@ export default function DiscoveryPanel({
 
   const StepIcon = current ? getStepIcon(current.icon) : null;
   const isFlowComplete = phase !== 'questions';
+  const showSummary = phase === 'thinking' || phase === 'ready';
   const discoverySlide = getSlideById('discovery');
 
   useEffect(() => {
@@ -256,7 +257,7 @@ export default function DiscoveryPanel({
           </div>
         </div>
 
-        {isFlowComplete && (
+        {showSummary && (
           <div className="discovery-deck__story">
             <h3 className="discovery-deck__story-title">What you&apos;re looking for</h3>
             <div className="discovery-deck__story-body">
@@ -285,7 +286,7 @@ export default function DiscoveryPanel({
           </div>
         )}
 
-        {shouldShowSlideContinue('discovery', { discoveryReady: phase === 'ready' }) && (
+        {shouldShowSlideContinue('discovery', { discoveryPhase: phase }) && (
           <SlideContinue
             nextLabel={discoverySlide.nextLabel}
             nextId={discoverySlide.nextId}

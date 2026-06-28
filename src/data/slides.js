@@ -3,7 +3,7 @@
  *
  * Down-arrow rules (`continue`):
  * - `always` — SlideContinue after slide content (natural document scroll)
- * - `whenReady` — SlideContinue only when discovery questionnaire is complete and ready
+ * - `whileQuestions` — SlideContinue during active questionnaire only (Discover skip-ahead)
  * - `never` — no down arrow on this slide
  *
  * `onContinue` (when a down arrow is shown):
@@ -46,7 +46,7 @@ export const SLIDES = [
     id: 'discovery',
     label: 'Discover',
     navLabel: 'Discover',
-    continue: 'whenReady',
+    continue: 'whileQuestions',
     onContinue: 'scroll',
     nextId: 'matches',
     nextLabel: 'For you',
@@ -96,15 +96,15 @@ export function getSlideById(id) {
 }
 
 /** Whether a slide should render SlideContinue for the current app state. */
-export function shouldShowSlideContinue(slideId, { discoveryReady = false } = {}) {
+export function shouldShowSlideContinue(slideId, { discoveryPhase = null } = {}) {
   const slide = getSlideById(slideId);
   if (!slide) return false;
 
   switch (slide.continue) {
     case 'always':
       return true;
-    case 'whenReady':
-      return discoveryReady;
+    case 'whileQuestions':
+      return discoveryPhase === 'questions';
     case 'never':
     default:
       return false;
