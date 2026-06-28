@@ -259,6 +259,15 @@
   max-width: 100%;
 }
 
+/* Desktop — roomier slide chrome */
+@media (min-width: 1100px) {
+  :root {
+    --slide-pad-block: clamp(1.35rem, 3.25vh, 2.25rem);
+    --slide-continue-gap: clamp(0.85rem, 2.75vh, 1.65rem);
+    --slide-continue-bottom: 0.65rem;
+  }
+}
+
 /* Desktop enhancements */
 @media (min-width: 901px) {
   .story-stage__inner {
