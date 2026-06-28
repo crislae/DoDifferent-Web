@@ -38,11 +38,15 @@ function TrustCard({ card, isActive, onActivate }) {
       tabIndex={0}
     >
       <div className="curated-deck__card-content">
-        <span className="curated-deck__card-badge" aria-hidden="true">
-          <Icon size={22} strokeWidth={1.65} />
-        </span>
-        <span className="curated-deck__card-step">{card.step}</span>
-        <h3 className="curated-deck__card-title">{card.title}</h3>
+        <div className="curated-deck__card-head">
+          <span className="curated-deck__card-badge" aria-hidden="true">
+            <Icon size={20} strokeWidth={1.65} />
+          </span>
+          <h3 className="curated-deck__card-title">
+            <span className="curated-deck__card-step">{card.step}</span>
+            {card.title}
+          </h3>
+        </div>
         <p className="curated-deck__card-body">{card.body}</p>
       </div>
 

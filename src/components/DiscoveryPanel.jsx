@@ -135,6 +135,7 @@ export default function DiscoveryPanel({
   };
 
   const StepIcon = current ? getStepIcon(current.icon) : null;
+  const isFlowComplete = phase !== 'questions';
 
   useEffect(() => {
     if (phase === 'questions' && !exiting && current && questionRef.current) {
@@ -221,36 +222,23 @@ export default function DiscoveryPanel({
       aria-label="Discover experiences"
       id="discovery"
     >
-      <div className="discovery-deck">
-        <div className="discovery-deck__intro">
+      <div className={`discovery-deck${isFlowComplete ? ' discovery-deck--complete' : ''}`}>
+        <figure className="discovery-deck__media" aria-label="Scenes from curated experiences">
+          <ImageSlideshow
+            images={DISCOVERY_SLIDESHOW_IMAGES}
+            intervalMs={4000}
+            className="discovery-deck__image"
+          />
+        </figure>
+
+        <header className="discovery-deck__header">
           <h2 className="discovery-deck__title">Tell us what you&apos;re in the mood for.</h2>
           <p className="discovery-deck__sub">
             A few quick choices help us find experiences that feel right for today.
           </p>
-          <figure className="discovery-deck__media" aria-label="Scenes from curated experiences">
-            <ImageSlideshow
-              images={DISCOVERY_SLIDESHOW_IMAGES}
-              intervalMs={4000}
-              className="discovery-deck__image"
-            />
-          </figure>
-        </div>
+        </header>
 
-        <div className="discovery-deck__panel">
-          <div className="discovery__sentence-slot" aria-live="polite">
-            {sentence && (
-              <button
-                type="button"
-                className="discovery__sentence"
-                onClick={handleSentenceClick}
-                disabled={exiting}
-                aria-label="Change your answers — start the discovery again from the beginning"
-              >
-                {sentence}
-              </button>
-            )}
-          </div>
-
+        <div className="discovery-deck__questionnaire">
           <div className="discovery__interaction">
             {phase === 'questions' && current && (
               <ActiveQuestion
@@ -262,6 +250,25 @@ export default function DiscoveryPanel({
                 {renderOptions()}
               </ActiveQuestion>
             )}
+          </div>
+        </div>
+
+        <div className="discovery-deck__story">
+          <h3 className="discovery-deck__story-title">What you&apos;re looking for</h3>
+          <div className="discovery-deck__story-body">
+            <div className="discovery__sentence-slot" aria-live="polite">
+              {sentence && (
+                <button
+                  type="button"
+                  className="discovery__sentence"
+                  onClick={handleSentenceClick}
+                  disabled={exiting}
+                  aria-label="Change your answers — start the discovery again from the beginning"
+                >
+                  {sentence}
+                </button>
+              )}
+            </div>
 
             {phase === 'thinking' && (
               <DiscoveryThinking onReady={() => setPhase('ready')} />

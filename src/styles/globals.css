@@ -420,7 +420,7 @@ a {
 .curated-deck__cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
+  gap: clamp(1rem, 1.5vw, 1.35rem);
   width: 100%;
 }
 
@@ -471,20 +471,28 @@ a {
 .curated-deck__card-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
+  gap: 0.65rem;
   flex: 1 1 auto;
-  padding: clamp(1.35rem, 2.8vh, 1.75rem) clamp(1.15rem, 2.2vw, 1.35rem)
-    clamp(1.25rem, 2.5vh, 1.5rem);
-  text-align: center;
+  padding: clamp(1.2rem, 2.4vh, 1.45rem) clamp(1.2rem, 2.2vw, 1.45rem);
+  text-align: left;
+}
+
+.curated-deck__card-head {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
 }
 
 .curated-deck__card-badge {
   display: inline-flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  margin: 0 0 0.75rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  margin: 0;
   color: #fff;
   background: var(--color-accent);
   border-radius: 50%;
@@ -495,28 +503,41 @@ a {
     box-shadow 0.45s ease;
 }
 
-.curated-deck__card-step {
-  display: block;
-  margin: 0 0 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--color-copper);
-}
-
 .curated-deck__card-title {
-  margin: 0 0 0.55rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.35rem 0.5rem;
+  min-width: 0;
+  margin: 0;
   font-family: var(--font-serif);
-  font-size: clamp(1.15rem, 1.9vw, 1.35rem);
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
   font-weight: 500;
   line-height: 1.2;
   color: var(--color-text);
 }
 
+.curated-deck__card-step {
+  flex-shrink: 0;
+  font-family: var(--font-sans, inherit);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--color-copper);
+}
+
+.curated-deck__card-step::after {
+  content: '·';
+  margin-left: 0.45rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  opacity: 0.55;
+}
+
 .curated-deck__card-body {
   margin: 0;
-  font-size: clamp(0.875rem, 1.6vw, 0.9375rem);
-  line-height: 1.55;
+  font-size: clamp(0.8125rem, 1.4vw, 0.875rem);
+  line-height: 1.5;
   color: var(--color-text-muted);
   text-wrap: pretty;
 }
@@ -587,28 +608,29 @@ a {
 }
 
 .discovery-deck {
-  display: grid;
-  grid-template-columns: 42fr 58fr;
-  gap: clamp(2rem, 4vw, 3.5rem);
-  align-items: center;
+  --discovery-deck-gap: clamp(1.75rem, 3.5vh, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: var(--discovery-deck-gap);
   width: 100%;
   max-width: var(--max-width);
   height: auto;
   margin: 0 auto;
 }
 
-.discovery-deck__intro {
+.discovery-deck--complete {
+  --discovery-deck-gap: clamp(1.15rem, 2.2vh, 1.65rem);
+}
+
+.discovery-deck__header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  gap: 0;
-  min-width: 0;
-  height: 100%;
   text-align: left;
 }
 
 .discovery-deck__title {
-  margin: 0 0 1.25rem;
+  margin: 0 0 1rem;
   font-family: var(--font-serif);
   font-size: clamp(2rem, 3.5vw, 2.85rem);
   font-weight: 500;
@@ -619,23 +641,28 @@ a {
 }
 
 .discovery-deck__sub {
-  margin: 0 0 1.5rem;
-  max-width: 26rem;
+  margin: 0;
+  max-width: 36rem;
   font-size: 1.125rem;
   line-height: 1.65;
   color: var(--color-text-muted);
+  text-wrap: pretty;
 }
 
 .discovery-deck__media {
   display: flex;
+  align-self: center;
   align-items: stretch;
   justify-content: center;
+  width: 100%;
+  max-width: 32rem;
   margin: 0;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.28);
   border-radius: var(--radius-image);
-  aspect-ratio: 4 / 3;
-  max-height: min(15rem, 28vh);
+  aspect-ratio: 16 / 9;
+  max-height: min(10.5rem, 20vh);
+  opacity: 0.94;
 }
 
 .discovery-deck__image {
@@ -643,7 +670,7 @@ a {
   width: 100%;
   height: 100%;
   border-radius: var(--radius-image);
-  box-shadow: var(--shadow-image);
+  box-shadow: 0 8px 24px rgba(26, 24, 20, 0.08);
 }
 
 .image-slideshow {
@@ -666,43 +693,38 @@ a {
   opacity: 1;
 }
 
-.discovery-deck__panel {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.discovery-deck__questionnaire {
   width: 100%;
   min-width: 0;
-  height: 100%;
-  padding: 0.25rem 0 0.25rem clamp(0.5rem, 2vw, 1.5rem);
+  max-height: 48rem;
+  overflow: hidden;
+  opacity: 1;
+  transition:
+    max-height 0.5s ease,
+    opacity 0.4s ease,
+    margin-bottom 0.5s ease;
 }
 
-.discovery-deck__panel .discovery__sentence-slot {
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: 0;
-  max-height: none;
-  margin-bottom: 1.5rem;
-  padding: 0;
-  overflow: visible;
+.discovery-deck--complete .discovery-deck__questionnaire {
+  max-height: 0;
+  opacity: 0;
+  margin-bottom: calc(-1 * var(--discovery-deck-gap));
+  pointer-events: none;
 }
 
-.discovery-deck__panel .discovery__sentence {
-  text-align: left;
+.discovery-deck__questionnaire .discovery__interaction {
+  min-height: 17rem;
 }
 
-.discovery-deck__panel .discovery__interaction {
-  min-height: 15rem;
-}
-
-.discovery-deck__panel .discovery__active {
+.discovery-deck__questionnaire .discovery__active {
   align-items: flex-start;
 }
 
-.discovery-deck__panel .discovery__step-icon {
+.discovery-deck__questionnaire .discovery__step-icon {
   margin: 0 0 0.85rem;
 }
 
-.discovery-deck__panel .discovery__question {
+.discovery-deck__questionnaire .discovery__question {
   margin: 0 0 1.5rem;
   max-width: 28rem;
   font-family: var(--font-serif);
@@ -712,7 +734,7 @@ a {
   text-align: left;
 }
 
-.discovery-deck__panel .discovery__options {
+.discovery-deck__questionnaire .discovery__options {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
@@ -721,10 +743,58 @@ a {
   max-width: 36rem;
 }
 
-.discovery-deck__panel .discovery__option {
+.discovery-deck__questionnaire .discovery__option {
   flex: 0 1 auto;
   min-width: min(100%, 12.5rem);
   border-radius: 1.125rem;
+}
+
+.discovery-deck__story {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 36rem;
+}
+
+.discovery-deck__story-title {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-copper);
+}
+
+.discovery-deck__story-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  width: 100%;
+}
+
+.discovery-deck--complete .discovery-deck__story-body {
+  gap: 0.85rem;
+}
+
+.discovery-deck__story .discovery__sentence-slot {
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  min-height: 3.25rem;
+  margin-bottom: 0;
+  padding: 0;
+  overflow: visible;
+  transition: min-height 0.45s ease;
+}
+
+.discovery-deck--complete .discovery-deck__story .discovery__sentence-slot {
+  min-height: 0;
+}
+
+.discovery-deck__story .discovery__sentence {
+  text-align: left;
 }
 
 /* Story pagination */
@@ -1119,14 +1189,12 @@ a {
 }
 
 .discovery-thinking {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
   gap: 1rem;
-  padding: 1rem;
+  width: 100%;
+  padding: 0;
 }
 
 .discovery-thinking__icon {
@@ -1146,10 +1214,10 @@ a {
 
 .discovery-thinking__text {
   margin: 0;
-  max-width: 24ch;
+  max-width: 28rem;
   font-size: 0.95rem;
   line-height: 1.55;
-  text-align: center;
+  text-align: left;
   color: var(--color-text-muted);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1173,14 +1241,12 @@ a {
 }
 
 .discovery-reveal {
-  position: absolute;
-  inset: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  padding: 1rem;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
+  padding: 0;
   animation: discovery-enter 0.5s ease both;
 }
 
@@ -1189,8 +1255,8 @@ a {
   font-size: 0.9rem;
   line-height: 1.5;
   color: var(--color-text-muted);
-  text-align: center;
-  max-width: 22ch;
+  text-align: left;
+  max-width: 28rem;
 }
 
 .discovery-reveal__btn {
@@ -1518,6 +1584,11 @@ a {
 
   .hero-inspiration__example--visible {
     opacity: 1;
+  }
+
+  .discovery-deck__questionnaire,
+  .discovery-deck__story .discovery__sentence-slot {
+    transition: none;
   }
 
   .story-scroll {
@@ -2441,6 +2512,60 @@ a {
 
   .story-pagination {
     display: none;
+  }
+
+  .story-stage--curated {
+    justify-content: flex-start;
+    min-height: auto;
+    padding-top: clamp(1.75rem, 4vh, 2.5rem);
+    padding-bottom: clamp(1.75rem, 4vh, 2.5rem);
+  }
+
+  .curated-deck__header {
+    margin-bottom: clamp(1.15rem, 3vh, 1.65rem);
+  }
+
+  .curated-deck__cards {
+    grid-template-columns: 1fr;
+    gap: clamp(0.75rem, 2vh, 1rem);
+    max-width: 28rem;
+    margin: 0 auto;
+  }
+
+  .curated-deck__card-content {
+    gap: 0.6rem;
+    padding: clamp(1.15rem, 2.8vh, 1.35rem) clamp(1.2rem, 4vw, 1.45rem);
+  }
+
+  .curated-deck__card-head {
+    gap: 0.75rem;
+  }
+
+  .curated-deck__card-badge {
+    width: 2.625rem;
+    height: 2.625rem;
+  }
+
+  .curated-deck__card-title {
+    font-size: clamp(1.1rem, 4.2vw, 1.25rem);
+  }
+
+  .curated-deck__card-body {
+    font-size: clamp(0.875rem, 3.4vw, 0.9375rem);
+    line-height: 1.5;
+  }
+
+  .discovery-deck {
+    --discovery-deck-gap: clamp(2rem, 4.5vh, 2.75rem);
+  }
+
+  .discovery-deck--complete {
+    --discovery-deck-gap: clamp(1.25rem, 3vh, 1.75rem);
+  }
+
+  .discovery-deck__media {
+    max-width: 100%;
+    max-height: min(9.5rem, 22vh);
   }
 }
 
