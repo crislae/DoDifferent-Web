@@ -38,8 +38,15 @@
   --color-brand-tagline-hover: #6f695f;
   --section-padding-y: clamp(3.5rem, 8vh, 6rem);
   --slide-pad-block: clamp(1.25rem, 3vh, 2rem);
-  --slide-continue-safe-bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
+  --slide-visible-height: calc(100dvh - var(--scroll-offset));
+  --slide-continue-safe-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
   --transition-fade: 400ms ease-in-out;
+}
+
+@supports (height: 100svh) {
+  :root {
+    --slide-visible-height: calc(100svh - var(--scroll-offset));
+  }
 }
 
 *,
@@ -138,9 +145,15 @@ a {
 }
 
 /* Pin down-arrow near viewport bottom when slide content fits; grows naturally when taller */
+.story-stage:has(.slide-shell > .slide-continue) {
+  min-height: var(--slide-visible-height);
+}
+
 .slide-shell:has(.slide-continue) {
   flex: 1;
-  min-height: calc(100dvh - 2 * var(--slide-pad-block));
+  min-height: calc(
+    var(--slide-visible-height) - 2 * var(--slide-pad-block) - var(--slide-continue-safe-bottom)
+  );
 }
 
 .slide-shell:has(.slide-continue) > .slide-continue {
@@ -425,13 +438,20 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
   width: 100%;
   flex-shrink: 0;
   padding-top: clamp(0.35rem, 1vh, 0.75rem);
-  padding-bottom: 0.25rem;
-  margin-bottom: var(--slide-continue-safe-bottom);
+  padding-bottom: var(--slide-continue-safe-bottom);
   overflow: visible;
+}
+
+.slide-continue__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  width: 100%;
+  flex-shrink: 0;
 }
 
 .slide-continue__hint {
@@ -447,21 +467,6 @@ a {
 .slide-continue__cue {
   flex-shrink: 0;
   margin: 0;
-}
-
-.slide-continue .scroll-cue--inline {
-  flex-shrink: 0;
-  margin-top: 0;
-  overflow: visible;
-  animation: scroll-cue-bob-inline-safe 2.4s ease-in-out infinite;
-}
-
-.slide-continue .scroll-cue--inline:hover {
-  transform: translateY(-1px);
-}
-
-.slide-continue .scroll-cue--inline:focus-visible {
-  transform: none;
 }
 
 @keyframes scroll-cue-bob-inline-safe {
@@ -1069,6 +1074,26 @@ a {
   50% {
     transform: translateX(-50%) translateY(4px);
   }
+}
+
+/* SlideContinue — keep hint + arrow in flow (overrides absolute .scroll-cue) */
+.slide-continue .scroll-cue.scroll-cue--inline {
+  position: relative;
+  bottom: auto;
+  left: auto;
+  flex-shrink: 0;
+  margin: 0;
+  overflow: visible;
+  transform: none;
+  animation: scroll-cue-bob-inline-safe 2.4s ease-in-out infinite;
+}
+
+.slide-continue .scroll-cue.scroll-cue--inline:hover {
+  transform: translateY(-1px);
+}
+
+.slide-continue .scroll-cue.scroll-cue--inline:focus-visible {
+  transform: none;
 }
 
 /* Header */

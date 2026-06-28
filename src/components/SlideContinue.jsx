@@ -11,15 +11,17 @@ export default function SlideContinue({
 
   return (
     <div className={`slide-continue${className ? ` ${className}` : ''}`}>
-      {hint ? <p className="slide-continue__hint">{hint}</p> : null}
+      <div className="slide-continue__group">
+        {hint ? <p className="slide-continue__hint">{hint}</p> : null}
 
-      <ScrollCue
-        targetId={nextId}
-        label={nextLabel}
-        inline
-        className="slide-continue__cue"
-        onNavigate={onNavigate}
-      />
+        <ScrollCue
+          targetId={nextId}
+          label={nextLabel}
+          inline
+          className="slide-continue__cue"
+          onNavigate={onNavigate}
+        />
+      </div>
     </div>
   );
 }
