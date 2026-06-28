@@ -221,7 +221,7 @@ a {
 }
 
 .matches-stage .event-card__thought {
-  padding: 0.45rem 0 0;
+  padding: 0.55rem 0 0;
   margin-bottom: 0.65rem;
 }
 
@@ -1805,9 +1805,10 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  width: fit-content;
-  margin: 0.45rem auto 0;
+  gap: 0.85rem;
+  width: 100%;
+  max-width: 14rem;
+  margin: 0.65rem auto 0;
   padding: 0;
 }
 
@@ -1816,30 +1817,41 @@ a {
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  width: 0.875rem;
-  height: 0.875rem;
-  padding: 0.45rem;
-  margin: -0.45rem;
-  color: var(--color-text-subtle);
-  background: transparent;
-  border: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  margin: 0;
+  color: var(--color-text-muted);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
   border-radius: 50%;
   cursor: pointer;
   transition:
     color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
     opacity 0.18s ease;
+}
+
+.carousel-nav__btn svg {
+  width: 1.125rem;
+  height: 1.125rem;
 }
 
 .carousel-nav__btn:hover:not(:disabled) {
   color: var(--color-text);
+  border-color: var(--color-border-strong);
+  background: var(--color-surface);
 }
 
 .carousel-nav__btn:active:not(:disabled) {
-  opacity: 0.65;
+  opacity: 0.75;
 }
 
 .carousel-nav__btn:disabled {
-  opacity: 0.22;
+  opacity: 0.28;
   cursor: not-allowed;
 }
 
@@ -1848,82 +1860,16 @@ a {
   outline-offset: 2px;
 }
 
-.carousel-nav__dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.3rem;
+.carousel-nav__status {
   margin: 0;
-  padding: 0 0.1rem;
-  list-style: none;
-}
-
-.carousel-nav__dot {
-  width: 0.25rem;
-  height: 0.25rem;
-  padding: 0;
-  background: var(--color-border);
-  border: none;
-  border-radius: 100px;
-  cursor: pointer;
-  transition:
-    width 0.22s ease,
-    background 0.18s ease,
-    opacity 0.18s ease;
-}
-
-.carousel-nav__dot:hover {
-  background: color-mix(in srgb, var(--color-accent) 55%, var(--color-border));
-}
-
-.carousel-nav__dot--active {
-  width: 0.875rem;
-  background: var(--color-accent);
-}
-
-.carousel-nav__dot:focus-visible {
-  outline: 1.5px solid var(--color-accent);
-  outline-offset: 2px;
-}
-
-.carousel-nav--comfortable {
-  gap: 0.75rem;
-  margin-top: 0.65rem;
-}
-
-.carousel-nav--comfortable .carousel-nav__btn {
-  width: 2.75rem;
-  height: 2.75rem;
-  padding: 0;
-  margin: 0;
-  color: var(--color-text-muted);
-  background: var(--color-bg);
-  border: 1px solid var(--color-border);
-}
-
-.carousel-nav--comfortable .carousel-nav__btn svg {
-  width: 1.125rem;
-  height: 1.125rem;
-}
-
-.carousel-nav--comfortable .carousel-nav__btn:hover:not(:disabled) {
-  color: var(--color-text);
-  border-color: var(--color-border-strong);
-  background: var(--color-surface);
-}
-
-.carousel-nav--comfortable .carousel-nav__dots {
-  gap: 0.4rem;
-  padding: 0 0.25rem;
-}
-
-.carousel-nav--comfortable .carousel-nav__dot {
-  width: 0.35rem;
-  height: 0.35rem;
-}
-
-.carousel-nav--comfortable .carousel-nav__dot--active {
-  width: 1.125rem;
+  min-width: 4.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--color-text-subtle);
+  text-align: center;
 }
 
 .picky-mood-card {
@@ -2197,8 +2143,9 @@ a {
 
 .event-card__thought {
   margin-top: auto;
-  padding: 0.5rem 0 0;
-  margin-bottom: 0.85rem;
+  padding: 0.65rem 0 0;
+  margin-bottom: 0.8rem;
+  border-top: 1px solid var(--color-border);
 }
 
 .event-card__thought-label {

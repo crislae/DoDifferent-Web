@@ -176,27 +176,8 @@
     padding: 0.15rem 0 0.25rem;
   }
 
-  .carousel-nav--comfortable {
-    margin-top: 0.5rem;
-  }
-
-  .carousel-nav--comfortable .carousel-nav__btn {
-    width: 2.85rem;
-    height: 2.85rem;
-  }
-
   .carousel-nav {
-    gap: 0.4rem;
-    margin-top: 0.35rem;
-  }
-
-  .carousel-nav__btn {
-    padding: 0.55rem;
-    margin: -0.55rem;
-  }
-
-  .carousel-nav__dots {
-    gap: 0.28rem;
+    margin-top: 0.5rem;
   }
 
   .modal {

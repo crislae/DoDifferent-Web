@@ -161,13 +161,6 @@ export default function MatchesCarousel({
     scrollToRealIndex(Math.min(activeRealIndex + 1, realCount - 1), 'smooth');
   }, [activeRealIndex, realCount, scrollToRealIndex]);
 
-  const handleSelect = useCallback(
-    (index) => {
-      scrollToRealIndex(index, 'smooth');
-    },
-    [scrollToRealIndex],
-  );
-
   return (
     <div className="matches-carousel" aria-label="Picked for you">
       <div ref={viewportRef} className="matches-carousel__viewport">
@@ -215,10 +208,8 @@ export default function MatchesCarousel({
         </div>
       </div>
       <CarouselNav
-        className="carousel-nav--comfortable"
         count={realCount}
         activeIndex={activeRealIndex}
-        onSelect={handleSelect}
         onPrev={handlePrev}
         onNext={handleNext}
         labelPrefix="Pick"

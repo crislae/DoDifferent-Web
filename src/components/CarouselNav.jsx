@@ -3,7 +3,6 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 export default function CarouselNav({
   count,
   activeIndex,
-  onSelect,
   onPrev,
   onNext,
   labelPrefix = 'Pick',
@@ -13,6 +12,7 @@ export default function CarouselNav({
 
   const canPrev = activeIndex > 0;
   const canNext = activeIndex < count - 1;
+  const position = activeIndex + 1;
 
   return (
     <nav
@@ -26,22 +26,13 @@ export default function CarouselNav({
         disabled={!canPrev}
         aria-label={`Previous ${labelPrefix.toLowerCase()}`}
       >
-        <ChevronLeft size={15} strokeWidth={1.5} aria-hidden="true" />
+        <ChevronLeft size={18} strokeWidth={1.65} aria-hidden="true" />
       </button>
 
-      <ol className="carousel-nav__dots">
-        {Array.from({ length: count }, (_, index) => (
-          <li key={index}>
-            <button
-              type="button"
-              className={`carousel-nav__dot${index === activeIndex ? ' carousel-nav__dot--active' : ''}`}
-              onClick={() => onSelect(index)}
-              aria-label={`${labelPrefix} ${index + 1} of ${count}`}
-              aria-current={index === activeIndex ? 'true' : undefined}
-            />
-          </li>
-        ))}
-      </ol>
+      <p className="carousel-nav__status" aria-live="polite">
+        <span className="visually-hidden">{labelPrefix} </span>
+        {position} of {count}
+      </p>
 
       <button
         type="button"
@@ -50,7 +41,7 @@ export default function CarouselNav({
         disabled={!canNext}
         aria-label={`Next ${labelPrefix.toLowerCase()}`}
       >
-        <ChevronRight size={15} strokeWidth={1.5} aria-hidden="true" />
+        <ChevronRight size={18} strokeWidth={1.65} aria-hidden="true" />
       </button>
     </nav>
   );

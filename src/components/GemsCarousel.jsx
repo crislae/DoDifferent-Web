@@ -155,13 +155,6 @@ export default function GemsCarousel({
     scrollToRealIndex(Math.min(activeRealIndex + 1, realCount - 1), 'smooth');
   }, [activeRealIndex, realCount, scrollToRealIndex]);
 
-  const handleSelect = useCallback(
-    (index) => {
-      scrollToRealIndex(index, 'smooth');
-    },
-    [scrollToRealIndex],
-  );
-
   return (
     <div className="matches-carousel" aria-label="Worth Discovering">
       <div ref={viewportRef} className="matches-carousel__viewport">
@@ -207,7 +200,6 @@ export default function GemsCarousel({
       <CarouselNav
         count={realCount}
         activeIndex={activeRealIndex}
-        onSelect={handleSelect}
         onPrev={handlePrev}
         onNext={handleNext}
         labelPrefix="Gem"
