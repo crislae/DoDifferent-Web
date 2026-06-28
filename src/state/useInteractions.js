@@ -6,6 +6,7 @@ import {
   getLovedEventIds,
   hasRailView,
   clearDismissedInteractions,
+  removeLoveInteraction,
   INTERACTION_TYPES,
   RAIL_SOURCES,
 } from '../services/interactionStore';
@@ -48,10 +49,15 @@ export function useInteractions(intent) {
 
   const love = useCallback(
     (eventId, railSource = null) => {
-      if (saved.includes(eventId)) return;
+      if (saved.includes(eventId)) {
+        removeLoveInteraction(eventId);
+        refresh();
+        return;
+      }
+
       track({ eventId, interactionType: INTERACTION_TYPES.LOVE, railSource });
     },
-    [saved, track],
+    [saved, track, refresh],
   );
 
   const dismiss = useCallback(

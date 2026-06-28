@@ -38,9 +38,9 @@ export default function EventCard({
             className={`event-card__btn event-card__btn--love${isLoved ? ' event-card__btn--loved' : ''}`}
             onClick={() => onLove(event.id)}
             aria-pressed={isLoved}
-            aria-label={isLoved ? 'Loved' : 'Love it'}
+            aria-label={isLoved ? 'Unlike' : 'Love it'}
           >
-            {isLoved ? '👍 Loved' : '👍 Love it'}
+            {isLoved ? '👍 Unlike' : '👍 Love it'}
           </button>
           <button
             type="button"

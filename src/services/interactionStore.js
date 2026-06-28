@@ -137,3 +137,10 @@ export function clearDismissedInteractions() {
   );
   writeInteractions(interactions);
 }
+
+export function removeLoveInteraction(eventId) {
+  const interactions = readInteractions().filter(
+    (item) => !(item.eventId === eventId && item.interactionType === INTERACTION_TYPES.LOVE),
+  );
+  writeInteractions(interactions);
+}

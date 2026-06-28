@@ -199,53 +199,54 @@ a {
 }
 
 .matches-stage .event-card__body {
-  padding: 1rem 1.1rem 0.95rem;
+  padding: 1.15rem 1.2rem 1.1rem;
   gap: 0;
 }
 
 .matches-stage .event-card__title {
-  margin: 0 0 0.4rem;
-  font-size: 1.2rem;
-  line-height: 1.25;
+  margin: 0 0 0.5rem;
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.28;
 }
 
 .matches-stage .event-card__hook {
-  margin: 0 0 0.6rem;
-  font-size: 0.875rem;
-  line-height: 1.45;
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .matches-stage .event-card__logistics {
-  margin: 0 0 0.5rem;
-  font-size: 0.78rem;
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
 }
 
 .matches-stage .event-card__thought {
-  padding: 0.55rem 0 0;
-  margin-bottom: 0.65rem;
+  padding: 0.7rem 0 0;
+  margin-bottom: 0.85rem;
 }
 
 .matches-stage .event-card__thought-label {
-  margin-bottom: 0.35rem;
-  font-size: 0.7rem;
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
 }
 
 .matches-stage .event-card__thought-text {
-  font-size: 0.84rem;
-  line-height: 1.45;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
 
 .matches-stage .event-card__thought-text + .event-card__thought-text {
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
 }
 
 .matches-stage .event-card__actions {
-  gap: 0.35rem;
+  gap: 0.4rem;
 }
 
 .matches-stage .event-card__btn {
-  padding: 0.5rem 0.6rem;
-  font-size: 0.78rem;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8rem;
 }
 
 .matches-stage .picky-mood-card {
@@ -270,6 +271,56 @@ a {
 .matches-stage .picky-mood-card__btn {
   padding: 0.7rem 0.9rem;
   font-size: 0.85rem;
+}
+
+.gems-stage__header .worth-discovering__subtitle {
+  margin: 0;
+}
+
+.gems-stage .event-card__body {
+  padding: 1.15rem 1.2rem 1.1rem;
+}
+
+.gems-stage .event-card__title {
+  margin: 0 0 0.5rem;
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.28;
+}
+
+.gems-stage .event-card__hook {
+  margin: 0 0 0.75rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.gems-stage .event-card__logistics {
+  margin: 0 0 0.65rem;
+  font-size: 0.8rem;
+}
+
+.gems-stage .event-card__thought {
+  padding: 0.7rem 0 0;
+  margin-bottom: 0.85rem;
+}
+
+.gems-stage .event-card__thought-label {
+  margin-bottom: 0.45rem;
+  font-size: 1.05rem;
+}
+
+.gems-stage .event-card__thought-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.gems-stage .event-card__actions {
+  gap: 0.4rem;
+}
+
+.gems-stage .event-card__btn {
+  padding: 0.55rem 0.65rem;
+  font-size: 0.8rem;
 }
 
 .gems-stage {
@@ -1872,6 +1923,33 @@ a {
   text-align: center;
 }
 
+.matches-stage .carousel-nav__btn,
+.gems-stage .carousel-nav__btn {
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-color: color-mix(in srgb, var(--color-accent) 24%, var(--color-border));
+}
+
+.matches-stage .carousel-nav__btn:hover:not(:disabled),
+.gems-stage .carousel-nav__btn:hover:not(:disabled) {
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+.matches-stage .carousel-nav__btn:disabled,
+.gems-stage .carousel-nav__btn:disabled {
+  color: color-mix(in srgb, var(--color-accent) 45%, var(--color-text-subtle));
+  background: var(--color-accent-soft);
+  opacity: 0.45;
+}
+
+.matches-stage .carousel-nav__status,
+.gems-stage .carousel-nav__status {
+  color: var(--color-text);
+  font-weight: 600;
+}
+
 .picky-mood-card {
   width: 100%;
   max-width: 21rem;
@@ -2111,23 +2189,24 @@ a {
 }
 
 .event-card__body {
-  padding: 1.15rem 1.15rem 1.05rem;
+  padding: 1.25rem 1.2rem 1.15rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .event-card__title {
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.5rem;
   font-family: var(--font-serif);
-  font-size: 1.25rem;
-  font-weight: 600;
-  line-height: 1.26;
+  font-size: 1.28rem;
+  font-weight: 700;
+  line-height: 1.28;
   letter-spacing: -0.01em;
+  color: var(--color-text);
 }
 
 .event-card__hook {
-  margin: 0 0 0.7rem;
+  margin: 0 0 0.8rem;
   font-size: 0.9rem;
   font-style: italic;
   color: var(--color-text-muted);
@@ -2135,7 +2214,7 @@ a {
 }
 
 .event-card__logistics {
-  margin: 0 0 0.6rem;
+  margin: 0 0 0.7rem;
   font-size: 0.8rem;
   color: var(--color-text-subtle);
   line-height: 1.4;
@@ -2143,18 +2222,20 @@ a {
 
 .event-card__thought {
   margin-top: auto;
-  padding: 0.65rem 0 0;
-  margin-bottom: 0.8rem;
+  padding: 0.75rem 0 0;
+  margin-bottom: 0.9rem;
   border-top: 1px solid var(--color-border);
 }
 
 .event-card__thought-label {
   display: block;
-  font-size: 0.72rem;
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--color-accent);
-  margin-bottom: 0.35rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--color-text);
+  margin-bottom: 0.45rem;
 }
 
 .event-card__thought-list {
@@ -2165,24 +2246,24 @@ a {
 
 .event-card__thought-text {
   margin: 0;
-  font-size: 0.88rem;
+  font-size: 0.875rem;
   color: var(--color-text-muted);
   line-height: 1.5;
 }
 
 .event-card__thought-text + .event-card__thought-text {
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
 }
 
 .event-card__actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 .event-card__btn {
   flex: 1 1 auto;
-  padding: 0.55rem 0.7rem;
+  padding: 0.58rem 0.72rem;
   font-size: 0.8rem;
   font-weight: 500;
   border-radius: var(--radius-sm);
