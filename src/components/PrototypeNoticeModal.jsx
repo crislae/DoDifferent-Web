@@ -6,6 +6,8 @@ export default function PrototypeNoticeModal({ onClose, onBackToRecommendations 
 
   useEffect(() => {
     const previouslyFocused = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
     backRef.current?.focus({ preventScroll: true });
 
     const panel = panelRef.current;
@@ -45,6 +47,7 @@ export default function PrototypeNoticeModal({ onClose, onBackToRecommendations 
     panel.addEventListener('keydown', handleKeyDown);
     return () => {
       panel.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = previousOverflow;
       if (previouslyFocused instanceof HTMLElement) {
         previouslyFocused.focus({ preventScroll: true });
       }
@@ -69,8 +72,11 @@ export default function PrototypeNoticeModal({ onClose, onBackToRecommendations 
           Prototype experience
         </h2>
         <p className="modal__prototype-body">
-          This experience is part of the Do Different MVP and was created for discovery and
-          validation purposes. It is not a real bookable event yet.
+          This experience is part of the Do Different MVP and exists to validate the discovery
+          experience.
+        </p>
+        <p className="modal__prototype-body">
+          It is not a real bookable event yet.
         </p>
         <button
           ref={backRef}

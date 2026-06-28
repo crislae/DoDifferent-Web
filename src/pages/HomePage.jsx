@@ -20,6 +20,7 @@ import {
   saveMatchesRevealed,
   resetDiscoveryProgress,
 } from '../utils/discoveryProgress';
+import { consumeReturnSection } from '../utils/appRoute';
 
 export default function HomePage() {
   const pendingNavigationRef = useRef(null);
@@ -81,6 +82,19 @@ export default function HomePage() {
     pendingNavigationRef.current = null;
     scrollToIndex(index, 'smooth');
   }, [sectionIds, scrollToIndex]);
+
+  useEffect(() => {
+    const returnSectionId = consumeReturnSection();
+    if (!returnSectionId || !sectionIds.includes(returnSectionId)) return undefined;
+
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        scrollToSectionId(returnSectionId, 'auto');
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [scrollToSectionId, sectionIds]);
 
   // After first reveal, scroll once carousel layout has painted.
   useEffect(() => {
@@ -213,7 +227,7 @@ export default function HomePage() {
           matchesSession={matchesSession}
         />
 
-        <FooterSection />
+        <FooterSection returnSectionId={activeSectionId ?? 'footer'} />
       </main>
 
       <EventDetailModal

@@ -40,7 +40,7 @@ export default function EventCard({
             aria-pressed={isLoved}
             aria-label={isLoved ? 'Remove loved status' : 'Love it'}
           >
-            {isLoved ? '👍 Loved' : '👍 Love it'}
+            {isLoved ? '❤️ Loved' : '❤️ Love it'}
           </button>
           <button
             type="button"
@@ -48,7 +48,7 @@ export default function EventCard({
             onClick={() => onDismiss(event.id)}
             aria-label="Not for me"
           >
-            👎 Not for me
+            Not for me
           </button>
           <button
             type="button"

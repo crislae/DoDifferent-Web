@@ -198,14 +198,14 @@
   .modal__media {
     flex-shrink: 0;
     min-height: 0;
-    max-height: clamp(4.25rem, 14vh, 6rem);
+    max-height: clamp(3.25rem, 12vh, 5rem);
   }
 
   .modal__image {
     width: 100%;
     height: auto;
     min-height: 0;
-    max-height: clamp(4.25rem, 14vh, 6rem);
+    max-height: clamp(3.25rem, 12vh, 5rem);
     aspect-ratio: 16 / 9;
     object-fit: cover;
     object-position: center;
@@ -303,6 +303,79 @@
 
   .picky-mood-card {
     max-width: none;
+  }
+}
+
+/* Desktop polish — does not affect mobile (max-width: 720px) */
+@media (min-width: 721px) {
+  .story-stage--curated {
+    min-height: var(--slide-visible-height);
+  }
+
+  .story-stage--curated .slide-shell:has(.slide-continue) .curated-deck__body {
+    flex: 1;
+    justify-content: center;
+    min-height: 0;
+  }
+
+  .matches-stage .matches-carousel__slide-inner .event-card,
+  .gems-stage .matches-carousel__slide-inner .event-card {
+    min-height: 16.5rem;
+  }
+
+  .matches-stage .event-card__body,
+  .gems-stage .event-card__body {
+    padding: 1.45rem 1.4rem 1.3rem;
+    gap: 0.15rem;
+  }
+
+  .matches-stage .event-card__title,
+  .gems-stage .event-card__title {
+    margin-bottom: 0.55rem;
+    font-size: 1.32rem;
+  }
+
+  .matches-stage .event-card__hook,
+  .gems-stage .event-card__hook {
+    margin-bottom: 0.9rem;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
+  .matches-stage .event-card__logistics,
+  .gems-stage .event-card__logistics {
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+  }
+
+  .matches-stage .event-card__thought,
+  .gems-stage .event-card__thought {
+    padding-top: 0.65rem;
+    margin-bottom: 0.95rem;
+  }
+
+  .matches-stage .event-card__thought-label,
+  .gems-stage .event-card__thought-label {
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  .matches-stage .event-card__thought-text,
+  .gems-stage .event-card__thought-text {
+    font-size: 0.925rem;
+    line-height: 1.55;
+  }
+
+  .matches-stage .event-card__actions,
+  .gems-stage .event-card__actions {
+    gap: 0.5rem;
+  }
+
+  .matches-stage .event-card__btn,
+  .gems-stage .event-card__btn {
+    padding: 0.62rem 0.72rem;
+    font-size: 0.85rem;
   }
 }
 

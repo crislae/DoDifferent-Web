@@ -523,15 +523,17 @@ a {
 
 .hero-inspiration__label {
   margin: 0 0 0.65rem;
-  font-size: clamp(0.9375rem, 2vw, 1rem);
-  line-height: 1.6;
+  font-family: inherit;
+  font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.55;
   color: var(--color-text-muted);
 }
 
 .hero-inspiration__stage {
   display: grid;
   place-items: start;
-  min-height: clamp(4rem, 10vh, 5.5rem);
+  min-height: clamp(3.25rem, 8vh, 4.5rem);
 }
 
 .hero-inspiration__example {
@@ -539,12 +541,12 @@ a {
   width: 100%;
   max-width: 34rem;
   margin: 0;
-  font-family: var(--font-serif);
-  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: 0.01em;
-  color: var(--color-inspiration);
+  font-family: inherit;
+  font-size: clamp(1.0625rem, 2.5vw, 1.25rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: normal;
+  color: var(--color-text-muted);
   opacity: 0;
   transition: opacity var(--transition-fade);
 }
@@ -1271,6 +1273,14 @@ a {
     display: grid;
     grid-template-columns: minmax(0, auto) minmax(0, 1fr) auto;
     align-items: center;
+  }
+
+  .header__section-nav {
+    justify-self: end;
+  }
+
+  .header__section-list {
+    justify-content: flex-end;
   }
 }
 
@@ -2413,14 +2423,14 @@ a {
   align-self: start;
   overflow: hidden;
   background: rgba(255, 255, 255, 0.35);
-  max-height: clamp(8rem, 28vh, 11.5rem);
+  max-height: clamp(6rem, 22vh, 9rem);
 }
 
 .modal__image {
   display: block;
   width: 100%;
   height: auto;
-  max-height: clamp(8rem, 28vh, 11.5rem);
+  max-height: clamp(6rem, 22vh, 9rem);
   object-fit: cover;
   object-position: center;
 }
@@ -2662,6 +2672,10 @@ a {
   color: var(--color-text-muted);
 }
 
+.modal__prototype-body + .modal__prototype-body {
+  margin-top: 0.75rem;
+}
+
 .modal__prototype-cta {
   align-self: flex-start;
   min-width: min(100%, 14rem);
@@ -2844,14 +2858,15 @@ a {
 }
 
 .deck-footer__support {
-  margin: 0;
-  max-width: 34ch;
-  font-family: var(--font-serif);
+  margin: 0 auto;
+  max-width: 36ch;
+  font-family: var(--font-sans);
   font-size: clamp(1.0625rem, 2vw, 1.25rem);
   font-weight: 600;
-  font-style: italic;
-  line-height: 1.55;
+  font-style: normal;
+  line-height: 1.7;
   color: var(--color-text);
+  text-align: center;
   text-wrap: balance;
 }
 
@@ -3037,6 +3052,10 @@ a {
   font-size: 1rem;
   line-height: 1.6;
   color: var(--color-text);
+}
+
+.static-page__notice p + p {
+  margin-top: 0.85rem;
 }
 
 .static-page__section {

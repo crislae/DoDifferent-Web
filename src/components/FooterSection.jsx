@@ -1,4 +1,4 @@
-import { ROUTES } from '../utils/appRoute';
+import { navigateToStaticPage, ROUTES } from '../utils/appRoute';
 import { FOOTER_YOGA_ALT, FOOTER_YOGA_IMAGE } from '../data/siteImages';
 
 const CURIOSITY_IN_MOTION_URL = 'https://curiosity-in-motion.vercel.app/#curiosity';
@@ -10,7 +10,12 @@ const FOOTER_LINKS = [
   { label: 'Become a Partner', href: ROUTES.partner },
 ];
 
-export default function FooterSection() {
+export default function FooterSection({ returnSectionId = 'footer' }) {
+  const handleStaticLink = (event, href) => {
+    event.preventDefault();
+    navigateToStaticPage(href, returnSectionId);
+  };
+
   return (
     <section id="footer" className="story-stage story-stage--footer" aria-label="Slide 7: Contact">
       <div className="deck-footer">
@@ -53,7 +58,11 @@ export default function FooterSection() {
             <ul className="deck-footer__links">
               {FOOTER_LINKS.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="deck-footer__link">
+                  <a
+                    href={link.href}
+                    className="deck-footer__link"
+                    onClick={(event) => handleStaticLink(event, link.href)}
+                  >
                     {link.label}
                   </a>
                 </li>
