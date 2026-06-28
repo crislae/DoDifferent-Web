@@ -10,11 +10,23 @@ export function readScrollOffset() {
   return Number.isFinite(parsed) ? parsed + 12 : 92;
 }
 
-/** Scrolls so the slide head (icon + title), title, or section top sits below the sticky header. */
-export function scrollToSection(targetId, behavior = 'smooth') {
-  const headTarget = document.getElementById(`${targetId}-head`);
-  const titleTarget = document.getElementById(`${targetId}-title`);
-  const target = headTarget ?? titleTarget ?? document.getElementById(targetId);
+/**
+ * Scrolls so the slide head (icon + title), title, or section top sits below the sticky header.
+ * @param {{ preferSectionRoot?: boolean }} [options]
+ *   When true, scrolls to `#${targetId}` only (e.g. intro hero must show image + copy).
+ */
+export function scrollToSection(targetId, behavior = 'smooth', options = {}) {
+  const { preferSectionRoot = false } = options;
+
+  let target;
+  if (preferSectionRoot) {
+    target = document.getElementById(targetId);
+  } else {
+    const headTarget = document.getElementById(`${targetId}-head`);
+    const titleTarget = document.getElementById(`${targetId}-title`);
+    target = headTarget ?? titleTarget ?? document.getElementById(targetId);
+  }
+
   if (!target) return;
 
   const offset = readScrollOffset();

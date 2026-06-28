@@ -136,6 +136,17 @@ a {
   margin: 0 auto;
 }
 
+/* Pin down-arrow near viewport bottom when slide content fits; grows naturally when taller */
+.slide-shell:has(.slide-continue) {
+  flex: 1;
+  min-height: calc(100dvh - 2 * var(--slide-pad-block));
+}
+
+.slide-shell:has(.slide-continue) > .slide-continue {
+  flex-shrink: 0;
+  margin-top: auto;
+}
+
 .story-stage--band {
   background: var(--color-surface);
   border-block: 1px solid var(--color-border);
@@ -415,7 +426,7 @@ a {
   align-items: center;
   gap: 0.75rem;
   width: 100%;
-  padding-top: clamp(1rem, 2.5vh, 1.5rem);
+  padding-top: clamp(0.5rem, 1.5vh, 1rem);
 }
 
 .slide-continue__hint {
@@ -705,9 +716,12 @@ a {
   padding-block: clamp(1rem, 4vh, 3rem);
 }
 
-.story-stage--transition .slide-shell {
-  min-height: calc(100dvh - 2 * var(--slide-pad-block));
+.story-stage--transition .slide-shell:has(.slide-continue) .transition-deck__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  min-height: 0;
 }
 
 .transition-deck__title {

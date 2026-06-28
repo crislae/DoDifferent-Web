@@ -18,7 +18,7 @@ export default function Header({ activeSectionId = null }) {
 
   const handleIntroScroll = (event) => {
     event.preventDefault();
-    scrollToSection('intro', 'smooth');
+    scrollToSection('intro', 'smooth', { preferSectionRoot: true });
     closeMenu();
   };
 
