@@ -19,14 +19,6 @@ export default function EventCard({
           {event.location} · {event.dateDuration} · {event.budget}
         </p>
 
-        <ul className="event-card__tags" aria-label="Tags">
-          {event.tags.map((tag) => (
-            <li key={tag} className="event-card__tag">
-              {tag}
-            </li>
-          ))}
-        </ul>
-
         {!compact && matchReasons?.length > 0 && (
           <div className="event-card__thought">
             <span className="event-card__thought-label">Why we thought of this</span>

@@ -16,8 +16,10 @@ import {
 } from '../utils/discoveryProgress';
 import DiscoveryThinking from './DiscoveryThinking';
 import DiscoveryRevealPrompt from './DiscoveryRevealPrompt';
+import SlideContinue from './SlideContinue';
 import ImageSlideshow from './ImageSlideshow';
 import { DISCOVERY_SLIDESHOW_IMAGES } from '../data/siteImages';
+import { getSlideById, shouldShowSlideContinue } from '../data/sectionNav';
 
 function resolveInitialStep() {
   const saved = readDiscoveryProgress();
@@ -136,6 +138,7 @@ export default function DiscoveryPanel({
 
   const StepIcon = current ? getStepIcon(current.icon) : null;
   const isFlowComplete = phase !== 'questions';
+  const discoverySlide = getSlideById('discovery');
 
   useEffect(() => {
     if (phase === 'questions' && !exiting && current && questionRef.current) {
@@ -280,6 +283,14 @@ export default function DiscoveryPanel({
               )}
             </div>
           </div>
+        )}
+
+        {shouldShowSlideContinue('discovery', { discoveryReady: phase === 'ready' }) && (
+          <SlideContinue
+            nextLabel={discoverySlide.nextLabel}
+            nextId={discoverySlide.nextId}
+            className="slide-continue--secondary"
+          />
         )}
       </div>
     </section>
