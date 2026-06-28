@@ -4,7 +4,6 @@
  * Down-arrow rules (`continue`):
  * - `always` — SlideContinue after slide content (natural document scroll)
  * - `never` — no down arrow on this slide
- * - `afterReveal` — down arrow only after matches are revealed (Picked for you)
  *
  * `onContinue` (when a down arrow is shown):
  * - `scroll` — ScrollCue scrolls to `nextId`
@@ -56,7 +55,7 @@ export const SLIDES = [
     id: 'matches',
     label: 'For you',
     navLabel: 'For you',
-    continue: 'afterReveal',
+    continue: 'always',
     onContinue: 'scroll',
     nextId: 'gems',
     nextLabel: 'Gems',
@@ -96,19 +95,11 @@ export function getSlideById(id) {
 }
 
 /** Whether a slide should render SlideContinue for the current app state. */
-export function shouldShowSlideContinue(slideId, { recommendationsRevealed = false } = {}) {
+export function shouldShowSlideContinue(slideId) {
   const slide = getSlideById(slideId);
   if (!slide) return false;
 
-  switch (slide.continue) {
-    case 'always':
-      return true;
-    case 'afterReveal':
-      return recommendationsRevealed;
-    case 'never':
-    default:
-      return false;
-  }
+  return slide.continue === 'always';
 }
 
 export function getSlideNavAriaLabel({ slide, label }) {

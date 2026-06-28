@@ -55,7 +55,7 @@ export default function MatchesStage({
 
         <div className="matches-stage__body">{content}</div>
 
-        {shouldShowSlideContinue('matches', { recommendationsRevealed }) && (
+        {shouldShowSlideContinue('matches') && (
           <SlideContinue nextLabel="Gems" nextId="gems" />
         )}
       </div>
