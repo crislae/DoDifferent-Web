@@ -281,7 +281,7 @@ a {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: calc(var(--header-height) + clamp(1rem, 2.5vh, 1.75rem))
-    clamp(1.5rem, 4vw, 3rem) clamp(2rem, 4vh, 3rem);
+    clamp(1.5rem, 4vw, 3rem) clamp(1.75rem, 3.5vh, 2.5rem);
   box-sizing: border-box;
 }
 
@@ -362,10 +362,6 @@ a {
 
 .hero-inspiration__example--visible {
   opacity: 1;
-}
-
-.hero-deck__cta {
-  margin-top: clamp(0.25rem, 1vh, 0.5rem);
 }
 
 /* Curated deck */
@@ -454,13 +450,9 @@ a {
     box-shadow: 0 18px 48px rgba(26, 24, 20, 0.11);
   }
 
-  .curated-deck__card:hover .curated-deck__card-image {
-    transform: scale(1.06);
-  }
-
   .curated-deck__card:hover .curated-deck__card-badge {
     background: var(--color-copper);
-    transform: translate(-50%, -50%) scale(1.08);
+    transform: scale(1.08);
     box-shadow: 0 0 0 10px rgba(184, 132, 90, 0.14);
   }
 }
@@ -470,54 +462,33 @@ a {
   box-shadow: 0 18px 48px rgba(26, 24, 20, 0.11);
 }
 
-.curated-deck__card--active .curated-deck__card-image {
-  transform: scale(1.06);
-}
-
 .curated-deck__card--active .curated-deck__card-badge {
   background: var(--color-copper);
-  transform: translate(-50%, -50%) scale(1.08);
+  transform: scale(1.08);
   box-shadow: 0 0 0 10px rgba(184, 132, 90, 0.14);
 }
 
-.curated-deck__card-media {
-  position: relative;
-  flex: 0 0 auto;
-  height: clamp(11rem, 26vh, 15rem);
-  overflow: hidden;
-}
-
-.curated-deck__card-image {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  transition: transform 0.55s ease;
-}
-
 .curated-deck__card-content {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1 1 auto;
-  padding: 2.35rem 1.35rem 1.65rem;
+  padding: clamp(1.35rem, 2.8vh, 1.75rem) clamp(1.15rem, 2.2vw, 1.35rem)
+    clamp(1.25rem, 2.5vh, 1.5rem);
   text-align: center;
 }
 
 .curated-deck__card-badge {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  z-index: 2;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 3rem;
+  height: 3rem;
+  margin: 0 0 0.75rem;
   color: #fff;
   background: var(--color-accent);
   border-radius: 50%;
   box-shadow: 0 8px 24px rgba(44, 74, 62, 0.22);
-  transform: translate(-50%, -50%);
   transition:
     transform 0.45s ease,
     background-color 0.45s ease,
@@ -526,7 +497,7 @@ a {
 
 .curated-deck__card-step {
   display: block;
-  margin: 0 0 0.45rem;
+  margin: 0 0 0.5rem;
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.12em;
@@ -534,9 +505,9 @@ a {
 }
 
 .curated-deck__card-title {
-  margin: 0 0 0.65rem;
+  margin: 0 0 0.55rem;
   font-family: var(--font-serif);
-  font-size: clamp(1.2rem, 2vw, 1.45rem);
+  font-size: clamp(1.15rem, 1.9vw, 1.35rem);
   font-weight: 500;
   line-height: 1.2;
   color: var(--color-text);
@@ -544,9 +515,10 @@ a {
 
 .curated-deck__card-body {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: clamp(0.875rem, 1.6vw, 0.9375rem);
   line-height: 1.55;
   color: var(--color-text-muted);
+  text-wrap: pretty;
 }
 
 .curated-deck__card-accent {
@@ -1553,7 +1525,6 @@ a {
   }
 
   .curated-deck__card,
-  .curated-deck__card-image,
   .curated-deck__card-badge {
     transition: none;
   }

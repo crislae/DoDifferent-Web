@@ -165,7 +165,7 @@ export default function HomePage() {
       <Header scrollerRef={scrollerRef} />
 
       <div className="story-scroll" ref={scrollerRef}>
-        <Hero onFindExperience={handleStartDiscovery} />
+        <Hero />
         <CuratedSection />
         <TrustSection />
 

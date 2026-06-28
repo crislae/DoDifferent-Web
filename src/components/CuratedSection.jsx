@@ -1,13 +1,5 @@
 import { useRef, useState } from 'react';
 import { Search, Heart, Send } from 'lucide-react';
-import {
-  TRUST_CARD_CURATE_ALT,
-  TRUST_CARD_CURATE_IMAGE,
-  TRUST_CARD_DISCOVER_ALT,
-  TRUST_CARD_DISCOVER_IMAGE,
-  TRUST_CARD_ENJOY_ALT,
-  TRUST_CARD_ENJOY_IMAGE,
-} from '../data/siteImages';
 
 const CARDS = [
   {
@@ -15,24 +7,18 @@ const CARDS = [
     title: 'We Discover',
     body: 'We constantly search for experiences that are different, memorable and worth your free time.',
     icon: Search,
-    image: TRUST_CARD_DISCOVER_IMAGE,
-    imageAlt: TRUST_CARD_DISCOVER_ALT,
   },
   {
     step: '02',
     title: 'We Curate',
     body: 'Every experience has to pass one simple test: would we recommend it to someone we care about?',
     icon: Heart,
-    image: TRUST_CARD_CURATE_IMAGE,
-    imageAlt: TRUST_CARD_CURATE_ALT,
   },
   {
     step: '03',
     title: 'You Enjoy',
     body: "When you're ready, you'll book directly with the provider. No hidden fees. Just great experiences.",
     icon: Send,
-    image: TRUST_CARD_ENJOY_IMAGE,
-    imageAlt: TRUST_CARD_ENJOY_ALT,
   },
 ];
 
@@ -51,15 +37,6 @@ function TrustCard({ card, isActive, onActivate }) {
       }}
       tabIndex={0}
     >
-      <div className="curated-deck__card-media">
-        <img
-          className="curated-deck__card-image"
-          src={card.image}
-          alt={card.imageAlt}
-          loading="lazy"
-        />
-      </div>
-
       <div className="curated-deck__card-content">
         <span className="curated-deck__card-badge" aria-hidden="true">
           <Icon size={22} strokeWidth={1.65} />
