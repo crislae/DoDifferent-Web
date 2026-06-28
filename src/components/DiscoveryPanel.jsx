@@ -253,32 +253,34 @@ export default function DiscoveryPanel({
           </div>
         </div>
 
-        <div className="discovery-deck__story">
-          <h3 className="discovery-deck__story-title">What you&apos;re looking for</h3>
-          <div className="discovery-deck__story-body">
-            <div className="discovery__sentence-slot" aria-live="polite">
-              {sentence && (
-                <button
-                  type="button"
-                  className="discovery__sentence"
-                  onClick={handleSentenceClick}
-                  disabled={exiting}
-                  aria-label="Change your answers — start the discovery again from the beginning"
-                >
-                  {sentence}
-                </button>
+        {isFlowComplete && (
+          <div className="discovery-deck__story">
+            <h3 className="discovery-deck__story-title">What you&apos;re looking for</h3>
+            <div className="discovery-deck__story-body">
+              <div className="discovery__sentence-slot" aria-live="polite">
+                {sentence && (
+                  <button
+                    type="button"
+                    className="discovery__sentence"
+                    onClick={handleSentenceClick}
+                    disabled={exiting}
+                    aria-label="Change your answers — start the discovery again from the beginning"
+                  >
+                    {sentence}
+                  </button>
+                )}
+              </div>
+
+              {phase === 'thinking' && (
+                <DiscoveryThinking onReady={() => setPhase('ready')} />
+              )}
+
+              {phase === 'ready' && (
+                <DiscoveryRevealPrompt onReveal={onViewResults} />
               )}
             </div>
-
-            {phase === 'thinking' && (
-              <DiscoveryThinking onReady={() => setPhase('ready')} />
-            )}
-
-            {phase === 'ready' && (
-              <DiscoveryRevealPrompt onReveal={onViewResults} />
-            )}
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

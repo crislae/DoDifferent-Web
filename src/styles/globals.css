@@ -1026,6 +1026,7 @@ a {
   max-width: 36rem;
   margin: 0 auto;
   text-align: center;
+  animation: discovery-story-in 0.45s ease both;
 }
 
 .discovery-deck__story-title {
@@ -2014,6 +2015,18 @@ a {
   }
 }
 
+@keyframes discovery-story-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @keyframes discovery-exit {
   from {
     opacity: 1;
@@ -2031,6 +2044,7 @@ a {
 @media (prefers-reduced-motion: reduce) {
   .discovery__active--enter,
   .discovery__active--exit,
+  .discovery-deck__story,
   .discovery-thinking__sparkle,
   .discovery-reveal__btn-cue,
   .hero-inspiration__example,
