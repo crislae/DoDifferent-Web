@@ -186,20 +186,52 @@
   }
 
   .modal__panel {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
+    grid-template-columns: unset;
     max-height: 92svh;
     border-radius: 24px 24px 0 0;
     animation: modal-panel-in-mobile 0.38s ease both;
   }
 
+  .modal__media {
+    flex-shrink: 0;
+    min-height: 0;
+  }
+
   .modal__image {
-    min-height: 11rem;
-    max-height: 32vh;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: clamp(5.5rem, 18vh, 7.5rem);
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    object-position: center;
   }
 
   .modal__content {
+    flex: 1 1 auto;
+    min-height: 0;
     max-height: none;
-    padding: clamp(1.35rem, 4vw, 1.75rem) clamp(1.25rem, 4vw, 1.5rem);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    padding: clamp(1.15rem, 3.5vw, 1.5rem) clamp(1.15rem, 4vw, 1.35rem)
+      max(1.35rem, env(safe-area-inset-bottom, 0px));
+    box-shadow: inset 0 -14px 12px -12px rgba(26, 24, 20, 0.1);
+  }
+
+  .modal__close {
+    top: 0.7rem;
+    right: 0.7rem;
+    width: 2.65rem;
+    height: 2.65rem;
+    box-shadow: 0 4px 18px rgba(26, 24, 20, 0.14);
+  }
+
+  .modal__header {
+    margin-bottom: 1.15rem;
+    padding-right: 2.5rem;
   }
 
   .modal__meta {
