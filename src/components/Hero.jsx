@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { GETAWAY_HILLS_ALT, GETAWAY_HILLS_IMAGE } from '../data/siteImages';
+import SlideContinue from './SlideContinue';
 
 const INSPIRATIONS = [
   'Participate in a wine tasting in Tuscany.',
@@ -34,43 +35,54 @@ export default function Hero() {
     <section
       id="intro"
       className="story-stage story-stage--hero"
+      aria-label="Slide 1: Welcome"
       aria-labelledby="hero-headline"
     >
-      <div className="hero-deck">
-        <figure className="hero-deck__banner">
-          <img
-            className="hero-deck__image"
-            src={GETAWAY_HILLS_IMAGE}
-            alt={GETAWAY_HILLS_ALT}
-            loading="eager"
-          />
-        </figure>
+      <div className="hero-deck slide-shell">
+        <div className="hero-deck__main">
+          <div id="intro-head" className="hero-deck__copy">
+            <h1 id="hero-headline" className="hero-deck__title">
+              Not sure what to do different this weekend?
+            </h1>
 
-        <h1 id="hero-headline" className="hero-deck__title">
-          Not sure what to do different this weekend?
-        </h1>
+            <p className="hero-deck__support">
+              We help you discover extraordinary experiences that fit what you&apos;re
+              looking for.
+            </p>
 
-        <p className="hero-deck__support">
-          We help you discover extraordinary experiences that fit what you&apos;re
-          looking for.
-        </p>
-
-        <div className="hero-inspiration" aria-live="polite" aria-atomic="true">
-          <p className="hero-inspiration__label">What if you could...</p>
-          <div className="hero-inspiration__stage">
-            {INSPIRATIONS.map((example, exampleIndex) => (
-              <p
-                key={example}
-                className={`hero-inspiration__example${
-                  exampleIndex === index && visible ? ' hero-inspiration__example--visible' : ''
-                }`}
-                aria-hidden={exampleIndex !== index}
-              >
-                {example}
-              </p>
-            ))}
+            <div className="hero-inspiration" aria-live="polite" aria-atomic="true">
+              <p className="hero-inspiration__label">What if you could...</p>
+              <div className="hero-inspiration__stage">
+                {INSPIRATIONS.map((example, exampleIndex) => (
+                  <p
+                    key={example}
+                    className={`hero-inspiration__example${
+                      exampleIndex === index && visible ? ' hero-inspiration__example--visible' : ''
+                    }`}
+                    aria-hidden={exampleIndex !== index}
+                  >
+                    {example}
+                  </p>
+                ))}
+              </div>
+            </div>
           </div>
+
+          <figure className="hero-deck__banner">
+            <img
+              className="hero-deck__image"
+              src={GETAWAY_HILLS_IMAGE}
+              alt={GETAWAY_HILLS_ALT}
+              loading="eager"
+            />
+          </figure>
         </div>
+
+        <SlideContinue
+          nextLabel="How it works"
+          nextId="curated"
+          hint="Takes about a minute — no account needed."
+        />
       </div>
     </section>
   );

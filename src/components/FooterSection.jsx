@@ -12,7 +12,7 @@ const FOOTER_LINKS = [
 
 export default function FooterSection() {
   return (
-    <section id="footer" className="story-stage story-stage--footer" aria-label="Footer">
+    <section id="footer" className="story-stage story-stage--footer" aria-label="Slide 7: Contact">
       <div className="deck-footer">
         <figure className="deck-footer__hero">
           <img
@@ -22,8 +22,8 @@ export default function FooterSection() {
             loading="lazy"
             decoding="async"
           />
-          <figcaption className="deck-footer__hero-overlay">
-            <h2 className="deck-footer__headline">Ready for your next story?</h2>
+          <figcaption id="footer-head" className="deck-footer__hero-overlay">
+            <h2 id="footer-title" className="deck-footer__headline">Ready for your next story?</h2>
             <p className="deck-footer__support">
               We&apos;ll keep searching for experiences worth remembering.
               <br />

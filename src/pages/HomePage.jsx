@@ -13,6 +13,8 @@ import { rankExperiences } from '../services/matchingEngine';
 import { useCurrentIntent } from '../state/useCurrentIntent';
 import { useInteractions } from '../state/useInteractions';
 import { useStoryDeck } from '../state/useStoryDeck';
+import { useActiveSection } from '../hooks/useActiveSection';
+import { SECTION_NAV_IDS } from '../data/sectionNav';
 import {
   readMatchesRevealed,
   saveMatchesRevealed,
@@ -59,6 +61,10 @@ export default function HomePage() {
     [],
   );
 
+  const navSectionIds = useMemo(() => SECTION_NAV_IDS, []);
+
+  const activeSectionId = useActiveSection(navSectionIds);
+
   const { scrollToIndex, scrollToSectionId } = useStoryDeck(
     sectionIds,
     scrollerRef,
@@ -80,17 +86,22 @@ export default function HomePage() {
     scrollToIndex(index, 'smooth');
   }, [sectionIds, scrollToIndex]);
 
-  // Matches stage mounts after first reveal — scroll once the section exists in the DOM.
+  // After first reveal, scroll once carousel layout has painted.
   useEffect(() => {
     if (!pendingMatchesScrollRef.current || !recommendationsRevealed) return;
 
-    const index = sectionIds.indexOf('matches');
-    const matchesSection = document.getElementById('matches');
-    if (index < 0 || !matchesSection) return;
+    const anchor = document.getElementById('matches-head');
+    if (!anchor) return;
 
     pendingMatchesScrollRef.current = false;
-    scrollToIndex(index, 'smooth');
-  }, [recommendationsRevealed, sectionIds, scrollToIndex, matchesSession]);
+    const frame = window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => {
+        scrollToSectionId('matches', 'smooth');
+      });
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [recommendationsRevealed, scrollToSectionId, matchesSession]);
 
   const resetToDiscovery = useCallback(
     ({ remountDiscovery = false } = {}) => {
@@ -162,12 +173,16 @@ export default function HomePage() {
 
   return (
     <div className="page">
-      <Header scrollerRef={scrollerRef} />
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
 
-      <div className="story-scroll" ref={scrollerRef}>
+      <Header activeSectionId={activeSectionId} />
+
+      <main id="main" className="story-scroll" ref={scrollerRef}>
         <Hero />
         <CuratedSection />
-        <TrustSection />
+        <TrustSection onNavigate={handleStartDiscovery} />
 
         <DiscoveryPanel
           key={discoverySession}
@@ -192,7 +207,6 @@ export default function HomePage() {
           railSource={railSources.PERSONALIZED}
           trackRailView={trackRailView}
           matchesSession={matchesSession}
-          scrollerRef={scrollerRef}
         />
 
         <GemsStage
@@ -204,7 +218,7 @@ export default function HomePage() {
         />
 
         <FooterSection />
-      </div>
+      </main>
 
       <EventDetailModal
         event={detailEvent?.event ?? null}

@@ -1,4 +1,5 @@
 import GemsCarousel from './GemsCarousel';
+import SlideContinue from './SlideContinue';
 
 export default function GemsStage({
   hiddenGems,
@@ -12,12 +13,12 @@ export default function GemsStage({
   return (
     <section
       id="gems"
-      className="story-stage story-stage--gems"
-      aria-label="Worth Discovering"
+      className="story-stage story-stage--gems story-stage--band story-stage--content-start"
+      aria-label="Slide 6: Gems"
       aria-labelledby="gems-title"
     >
-      <div className="worth-discovering">
-        <header className="worth-discovering__header">
+      <div className="gems-stage slide-shell">
+        <header id="gems-head" className="gems-stage__header worth-discovering__header">
           <h2 id="gems-title" className="worth-discovering__title">
             Worth Discovering
           </h2>
@@ -41,6 +42,8 @@ export default function GemsStage({
             </p>
           </div>
         )}
+
+        <SlideContinue nextLabel="Contact" nextId="footer" />
       </div>
     </section>
   );

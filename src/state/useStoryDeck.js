@@ -3,7 +3,7 @@ import { scrollToSection } from '../utils/scrollToSection';
 
 /**
  * Programmatic section navigation for CTAs (header, discovery flow).
- * Page scroll is native — no snap, wheel hijacking, or keyboard section jumps.
+ * Uses native document scroll with scroll-margin offsets for the sticky header.
  */
 
 export function useStoryDeck(sectionIds, scrollerRef) {

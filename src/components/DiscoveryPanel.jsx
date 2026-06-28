@@ -16,6 +16,7 @@ import {
 } from '../utils/discoveryProgress';
 import DiscoveryThinking from './DiscoveryThinking';
 import DiscoveryRevealPrompt from './DiscoveryRevealPrompt';
+import SlideContinue from './SlideContinue';
 import ImageSlideshow from './ImageSlideshow';
 import { DISCOVERY_SLIDESHOW_IMAGES } from '../data/siteImages';
 
@@ -218,11 +219,11 @@ export default function DiscoveryPanel({
 
   return (
     <section
-      className="story-stage story-stage--discovery"
-      aria-label="Discover experiences"
+      className={`story-stage story-stage--discovery${isFlowComplete ? ' story-stage--content-start' : ''}`}
+      aria-label="Slide 4: Discover"
       id="discovery"
     >
-      <div className={`discovery-deck${isFlowComplete ? ' discovery-deck--complete' : ''}`}>
+      <div className={`discovery-deck slide-shell${isFlowComplete ? ' discovery-deck--complete' : ''}`}>
         <figure className="discovery-deck__media" aria-label="Scenes from curated experiences">
           <ImageSlideshow
             images={DISCOVERY_SLIDESHOW_IMAGES}
@@ -231,8 +232,8 @@ export default function DiscoveryPanel({
           />
         </figure>
 
-        <header className="discovery-deck__header">
-          <h2 className="discovery-deck__title">Tell us what you&apos;re in the mood for.</h2>
+        <header id="discovery-head" className="discovery-deck__header">
+          <h2 id="discovery-title" className="discovery-deck__title">Tell us what you&apos;re in the mood for.</h2>
           <p className="discovery-deck__sub">
             A few quick choices help us find experiences that feel right for today.
           </p>
@@ -279,6 +280,14 @@ export default function DiscoveryPanel({
             )}
           </div>
         </div>
+
+        {phase === 'ready' && (
+          <SlideContinue
+            nextLabel="For you"
+            nextId="matches"
+            onNavigate={onViewResults}
+          />
+        )}
       </div>
     </section>
   );

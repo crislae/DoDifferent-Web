@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import { Search, Heart, Send } from 'lucide-react';
+import SlideContinue from './SlideContinue';
 
 const CARDS = [
   {
@@ -70,30 +71,34 @@ export default function CuratedSection() {
     <section
       id="curated"
       className="story-stage story-stage--curated"
-      aria-label="How it works"
+      aria-label="Slide 2: How it works"
       aria-labelledby="curated-title"
     >
-      <div className="curated-deck">
-        <header className="curated-deck__header">
-          <p className="curated-deck__eyebrow">HOW IT WORKS</p>
-          <h2 id="curated-title" className="curated-deck__title">
-            From our curiosity to your next story.
-          </h2>
-          <p className="curated-deck__subtitle">
-            We take care of the searching, you take care of the memories.
-          </p>
-        </header>
+      <div className="curated-deck slide-shell">
+        <div className="curated-deck__body">
+          <header id="curated-head" className="curated-deck__header">
+            <p className="curated-deck__eyebrow">HOW IT WORKS</p>
+            <h2 id="curated-title" className="curated-deck__title">
+              From our curiosity to your next story.
+            </h2>
+            <p className="curated-deck__subtitle">
+              We take care of the searching, you take care of the memories.
+            </p>
+          </header>
 
-        <div className="curated-deck__cards">
-          {CARDS.map((card) => (
-            <TrustCard
-              key={card.step}
-              card={card}
-              isActive={activeStep === card.step}
-              onActivate={handleCardActivate}
-            />
-          ))}
+          <div className="curated-deck__cards">
+            {CARDS.map((card) => (
+              <TrustCard
+                key={card.step}
+                card={card}
+                isActive={activeStep === card.step}
+                onActivate={handleCardActivate}
+              />
+            ))}
+          </div>
         </div>
+
+        <SlideContinue nextLabel="Our promise" nextId="trust" />
       </div>
     </section>
   );

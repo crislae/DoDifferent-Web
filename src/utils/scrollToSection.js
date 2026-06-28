@@ -1,20 +1,27 @@
-function resolveScroller(scrollerRef) {
-  if (scrollerRef?.current) {
-    return scrollerRef.current;
+/** Sticky header clearance — measured live so titles never sit under the bar. */
+export function readScrollOffset() {
+  const header = document.querySelector('.header');
+  if (header) {
+    return Math.ceil(header.getBoundingClientRect().height) + 12;
   }
 
-  return document.querySelector('.story-scroll');
+  const value = getComputedStyle(document.documentElement).getPropertyValue('--scroll-offset');
+  const parsed = parseFloat(value);
+  return Number.isFinite(parsed) ? parsed + 12 : 92;
 }
 
-/** Scrolls a deck section into view inside the story scroller (not the window). */
-export function scrollToSection(targetId, behavior = 'smooth', scrollerRef = null) {
-  const scroller = resolveScroller(scrollerRef);
-  const target = document.getElementById(targetId);
-  if (!scroller || !target) return;
+/** Scrolls so the slide head (icon + title), title, or section top sits below the sticky header. */
+export function scrollToSection(targetId, behavior = 'smooth', _scrollerRef = null) {
+  const headTarget = document.getElementById(`${targetId}-head`);
+  const titleTarget = document.getElementById(`${targetId}-title`);
+  const target = headTarget ?? titleTarget ?? document.getElementById(targetId);
+  if (!target) return;
 
-  const scrollerRect = scroller.getBoundingClientRect();
-  const targetRect = target.getBoundingClientRect();
-  const top = scroller.scrollTop + (targetRect.top - scrollerRect.top);
+  const offset = readScrollOffset();
+  const top = target.getBoundingClientRect().top + window.scrollY - offset;
 
-  scroller.scrollTo({ top, behavior });
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior,
+  });
 }

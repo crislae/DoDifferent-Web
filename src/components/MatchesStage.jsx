@@ -1,8 +1,8 @@
 import { Star } from 'lucide-react';
-import StageSection from './StageSection';
 import MatchesCarousel from './MatchesCarousel';
 import EmptyState from './EmptyState';
 import DiscoveryPromptState from './DiscoveryPromptState';
+import SlideContinue from './SlideContinue';
 
 export default function MatchesStage({
   recommendationsRevealed,
@@ -17,7 +17,6 @@ export default function MatchesStage({
   railSource,
   trackRailView,
   matchesSession,
-  scrollerRef = null,
 }) {
   let content;
 
@@ -41,18 +40,28 @@ export default function MatchesStage({
   }
 
   return (
-    <StageSection
+    <section
       id="matches"
-      title="Picked for you"
-      titleId="matches-title"
-      icon={Star}
-      showCue={false}
-      nextTarget="gems"
-      ariaLabel="Your matched experiences"
-      className="story-stage--matches"
-      scrollerRef={scrollerRef}
+      className="story-stage story-stage--matches story-stage--band story-stage--content-start"
+      aria-label="Slide 5: For you"
+      aria-labelledby="matches-title"
     >
-      {content}
-    </StageSection>
+      <div className="matches-stage slide-shell">
+        <header id="matches-head" className="matches-stage__header">
+          <div className="story-stage__icon" aria-hidden="true">
+            <Star size={28} strokeWidth={1.5} />
+          </div>
+          <h2 id="matches-title" className="story-stage__title">
+            Picked for you
+          </h2>
+        </header>
+
+        <div className="matches-stage__body">{content}</div>
+
+        {recommendationsRevealed && (
+          <SlideContinue nextLabel="Gems" nextId="gems" />
+        )}
+      </div>
+    </section>
   );
 }

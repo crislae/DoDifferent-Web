@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import EventCard from './EventCard';
 import GemsExhaustedCard from './GemsExhaustedCard';
+import CarouselNav from './CarouselNav';
 import { useCenteredCarousel, toSlideIndex } from '../state/useCenteredCarousel';
 import { useRailView } from '../state/useRailView';
 
@@ -146,9 +147,20 @@ export default function GemsCarousel({
     }
   }, [realCount, activeRealIndex, scrollToRealIndex]);
 
-  const hintText = showExhaustedSlide
-    ? 'Swipe or scroll to revisit gems you liked'
-    : 'Swipe or scroll to the next gem';
+  const handlePrev = useCallback(() => {
+    scrollToRealIndex(Math.max(activeRealIndex - 1, 0), 'smooth');
+  }, [activeRealIndex, scrollToRealIndex]);
+
+  const handleNext = useCallback(() => {
+    scrollToRealIndex(Math.min(activeRealIndex + 1, realCount - 1), 'smooth');
+  }, [activeRealIndex, realCount, scrollToRealIndex]);
+
+  const handleSelect = useCallback(
+    (index) => {
+      scrollToRealIndex(index, 'smooth');
+    },
+    [scrollToRealIndex],
+  );
 
   return (
     <div className="matches-carousel" aria-label="Worth Discovering">
@@ -192,9 +204,14 @@ export default function GemsCarousel({
           <CarouselSpacer position="trail" />
         </div>
       </div>
-      <p className="matches-carousel__hint" aria-hidden="true">
-        {hintText}
-      </p>
+      <CarouselNav
+        count={realCount}
+        activeIndex={activeRealIndex}
+        onSelect={handleSelect}
+        onPrev={handlePrev}
+        onNext={handleNext}
+        labelPrefix="Gem"
+      />
     </div>
   );
 }
