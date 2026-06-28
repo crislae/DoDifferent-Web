@@ -48,21 +48,23 @@ export default function FooterSection() {
           </a>
         </div>
 
-        <nav className="deck-footer__nav" aria-label="Legal and contact">
-          <ul className="deck-footer__links">
-            {FOOTER_LINKS.map((link) => (
-              <li key={link.href}>
-                <a href={link.href} className="deck-footer__link">
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="deck-footer__legal">
+          <nav className="deck-footer__nav" aria-label="Legal and contact">
+            <ul className="deck-footer__links">
+              {FOOTER_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="deck-footer__link">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <p className="deck-footer__closing">
-          © 2026 Do Different™ · Built with curiosity.
-        </p>
+          <p className="deck-footer__closing">
+            © 2026 Do Different™ · Built with curiosity.
+          </p>
+        </div>
       </div>
     </section>
   );

@@ -273,10 +273,6 @@ a {
   font-size: 0.85rem;
 }
 
-.gems-stage__header .worth-discovering__subtitle {
-  margin: 0;
-}
-
 .gems-stage .event-card__body {
   padding: 1.15rem 1.2rem 1.1rem;
 }
@@ -324,7 +320,7 @@ a {
 }
 
 .gems-stage {
-  gap: clamp(0.85rem, 2vh, 1.25rem);
+  gap: clamp(0.65rem, 1.75vh, 1rem);
 }
 
 .gems-stage__header {
@@ -336,11 +332,7 @@ a {
 }
 
 .gems-stage__header .worth-discovering__title {
-  margin-bottom: 0.5rem;
-}
-
-.gems-stage__header .worth-discovering__subtitle {
-  margin: 0;
+  margin: 0 0 clamp(0.5rem, 1.25vh, 0.75rem);
 }
 
 .gems-stage .worth-discovering__header {
@@ -2698,20 +2690,24 @@ a {
 
 .deck-footer {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
-  gap: clamp(2rem, 4vh, 2.75rem);
+  gap: clamp(1.25rem, 2.5vh, 1.75rem);
   width: 100%;
   max-width: var(--max-width);
+  min-height: calc(100svh - 2 * var(--slide-pad-block));
+  min-height: calc(100dvh - 2 * var(--slide-pad-block));
   margin: 0 auto;
   text-align: center;
 }
 
 .deck-footer__hero {
   position: relative;
+  flex-shrink: 0;
   width: 100%;
   margin: 0;
-  min-height: clamp(16rem, 42vh, 24rem);
+  min-height: clamp(14rem, 36vh, 20rem);
   border-radius: var(--radius-image);
   overflow: hidden;
   background: var(--color-bg);
@@ -2747,11 +2743,12 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1.25rem;
-  min-height: clamp(16rem, 42vh, 24rem);
+  justify-content: flex-end;
+  gap: 1.1rem;
+  min-height: clamp(14rem, 36vh, 20rem);
   margin: 0;
-  padding: clamp(2rem, 5vw, 3.5rem);
+  padding: clamp(2.25rem, 9vh, 3.75rem) clamp(1.75rem, 5vw, 3rem)
+    clamp(1.5rem, 4vh, 2.25rem);
   background: transparent;
 }
 
@@ -2795,10 +2792,14 @@ a {
 
 .deck-footer__lab {
   display: flex;
+  flex: 1;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 0.6rem;
   max-width: 26rem;
+  min-height: 0;
+  padding-block: clamp(0.5rem, 2vh, 1.25rem);
 }
 
 .deck-footer__eyebrow {
@@ -2827,7 +2828,7 @@ a {
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: 0.75rem 2rem;
+  gap: 0.5rem 1.5rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -2850,9 +2851,20 @@ a {
   margin: 0;
   font-family: var(--font-sans);
   font-size: 0.75rem;
-  line-height: 1.5;
+  line-height: 1.4;
   letter-spacing: 0.02em;
   color: var(--color-text-subtle);
+}
+
+.deck-footer__legal {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-top: auto;
+  padding-bottom: max(0.35rem, env(safe-area-inset-bottom, 0px));
 }
 
 /* Static pages */

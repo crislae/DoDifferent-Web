@@ -250,18 +250,28 @@
     min-width: 0;
   }
 
+  .deck-footer {
+    min-height: calc(100svh - 2 * var(--slide-pad-block));
+    gap: clamp(1rem, 2vh, 1.35rem);
+  }
+
   .deck-footer__hero {
-    min-height: clamp(14rem, 48vw, 18rem);
+    min-height: clamp(12rem, 40vw, 16rem);
   }
 
   .deck-footer__hero-overlay {
-    min-height: clamp(14rem, 48vw, 18rem);
-    padding: clamp(1.5rem, 5vw, 2rem);
+    min-height: clamp(12rem, 40vw, 16rem);
+    padding: clamp(1.75rem, 7vh, 2.5rem) clamp(1.25rem, 4vw, 1.5rem)
+      clamp(1.15rem, 3.5vh, 1.5rem);
   }
 
-  .deck-footer__links {
+  .deck-footer__legal .deck-footer__links {
     flex-direction: column;
-    gap: 0.65rem;
+    gap: 0.45rem;
+  }
+
+  .deck-footer__legal {
+    gap: 0.4rem;
   }
 
   .empty-state {
