@@ -1,8 +1,11 @@
 import StaticPageLayout from '../components/StaticPageLayout';
+import StaticPageMvpNotice from '../components/StaticPageMvpNotice';
 
 export default function ContactPage() {
   return (
     <StaticPageLayout title="Contact Do Different">
+      <StaticPageMvpNotice />
+
       <section className="static-page__section">
         <h2 className="static-page__heading">I have a question as a customer</h2>
         <p>

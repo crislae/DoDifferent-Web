@@ -22,6 +22,9 @@ export default function GemsStage({
           <h2 id="gems-title" className="worth-discovering__title">
             Worth Discovering
           </h2>
+          <p className="worth-discovering__subtitle story-stage__subtitle">
+            Curated gems we think deserve your attention.
+          </p>
         </header>
 
         {hasGems ? (

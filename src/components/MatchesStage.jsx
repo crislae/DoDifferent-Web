@@ -51,6 +51,9 @@ export default function MatchesStage({
           <h2 id="matches-title" className="story-stage__title">
             Picked for you
           </h2>
+          <p className="story-stage__subtitle">
+            Curated experiences based on what you&apos;re looking for.
+          </p>
         </header>
 
         <div className="matches-stage__body">{content}</div>

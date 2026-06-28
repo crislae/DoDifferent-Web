@@ -221,6 +221,7 @@ export default function HomePage() {
         matchReasons={detailEvent?.matchReasons ?? []}
         isLoved={detailEvent?.event ? isLoved(detailEvent.event.id) : false}
         onLove={(eventId) => love(eventId, detailEvent?.railSource ?? null)}
+        onDismiss={(eventId) => dismiss(eventId, detailEvent?.railSource ?? null)}
         onClose={() => setDetailEvent(null)}
       />
     </div>

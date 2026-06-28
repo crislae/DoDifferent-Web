@@ -1,8 +1,11 @@
 import StaticPageLayout from '../components/StaticPageLayout';
+import StaticPageMvpNotice from '../components/StaticPageMvpNotice';
 
 export default function PartnerPage() {
   return (
     <StaticPageLayout title="Become a Partner">
+      <StaticPageMvpNotice />
+
       <p>
         Do you organize experiences people never forget? We&apos;re always looking for
         exceptional hosts, guides and creators. If you think your experience belongs on Do
