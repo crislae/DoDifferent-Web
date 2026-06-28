@@ -22,7 +22,6 @@ import {
 } from '../utils/discoveryProgress';
 
 export default function HomePage() {
-  const scrollerRef = useRef(null);
   const pendingNavigationRef = useRef(null);
   const pendingMatchesScrollRef = useRef(false);
 
@@ -65,10 +64,7 @@ export default function HomePage() {
 
   const activeSectionId = useActiveSection(navSectionIds);
 
-  const { scrollToIndex, scrollToSectionId } = useStoryDeck(
-    sectionIds,
-    scrollerRef,
-  );
+  const { scrollToIndex, scrollToSectionId } = useStoryDeck(sectionIds);
 
   const queueSectionNavigation = useCallback((sectionId) => {
     pendingNavigationRef.current = sectionId;
@@ -179,7 +175,7 @@ export default function HomePage() {
 
       <Header activeSectionId={activeSectionId} />
 
-      <main id="main" className="story-scroll" ref={scrollerRef}>
+      <main id="main" className="story-scroll">
         <Hero />
         <CuratedSection />
         <TrustSection onNavigate={handleStartDiscovery} />

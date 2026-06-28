@@ -6,7 +6,7 @@ import { scrollToSection } from '../utils/scrollToSection';
  * Uses native document scroll with scroll-margin offsets for the sticky header.
  */
 
-export function useStoryDeck(sectionIds, scrollerRef) {
+export function useStoryDeck(sectionIds) {
   const scrollToIndex = useCallback(
     (index, behavior = 'smooth') => {
       if (!sectionIds.length) return;
@@ -15,9 +15,9 @@ export function useStoryDeck(sectionIds, scrollerRef) {
       const targetId = sectionIds[nextIndex];
       if (!targetId) return;
 
-      scrollToSection(targetId, behavior, scrollerRef);
+      scrollToSection(targetId, behavior);
     },
-    [sectionIds, scrollerRef],
+    [sectionIds],
   );
 
   const scrollToSectionId = useCallback(
@@ -28,10 +28,10 @@ export function useStoryDeck(sectionIds, scrollerRef) {
         return true;
       }
 
-      scrollToSection(targetId, behavior, scrollerRef);
+      scrollToSection(targetId, behavior);
       return false;
     },
-    [sectionIds, scrollToIndex, scrollerRef],
+    [sectionIds, scrollToIndex],
   );
 
   return { scrollToIndex, scrollToSectionId };

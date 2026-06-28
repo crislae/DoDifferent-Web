@@ -22,17 +22,72 @@ This repository validates the discovery experience before investing in backend i
 
 ## Features
 
-- **Editorial homepage** — full-viewport vertical story deck with scroll-snap navigation
+- **Editorial homepage** — vertical story sections with native document scroll (min-height 100dvh per slide, content may grow taller)
 - **Discovery questionnaire** — five-step intent flow (purpose, timing, distance, companions, budget)
 - **Deterministic recommendation engine** — weighted scoring from mood, timing, distance, companions, budget, and local learning signals
-- **Recommendation carousels** — “Picked for you” and “Worth Discovering” horizontal card rails
+- **Recommendation carousels** — “Picked for you” and “Worth Discovering” horizontal card rails with dot navigation
 - **Event detail modal** — expanded experience view with match reasons and provider link
 - **Local learning** — Love it, Not for me, and Tell me more interactions persisted in the browser
 - **Curated experiences** — static dataset of editorially written experiences
 - **Informational pages** — Contact, Privacy, Terms, Become a Partner
 - **Responsive design** — mobile-friendly layout and carousel behaviour
-- **Accessibility** — keyboard navigation, focus management, ARIA labels on key interactions
+- **Accessibility** — skip link, focus management, ARIA labels on key interactions
 - **Vercel Analytics** — production page-view tracking via `@vercel/analytics`
+
+---
+
+## Homepage slides
+
+Seven sections in scroll order (see `src/data/slides.js`):
+
+| # | Section ID   | Label              | Header nav |
+|---|--------------|--------------------|------------|
+| 1 | `intro`      | Welcome            | —          |
+| 2 | `curated`    | How it works       | Yes        |
+| 3 | `trust`      | Our promise        | —          |
+| 4 | `discovery`  | Discover           | Yes        |
+| 5 | `matches`    | For you            | Yes        |
+| 6 | `gems`       | Gems               | Yes        |
+| 7 | `footer`     | Contact            | Yes        |
+
+---
+
+## Navigation model
+
+**Primary scroll:** Native window scroll on `<main class="story-scroll">`. No scroll-snap, no nested story scroller, no pinned down arrows.
+
+**Sticky header:** Section links scroll to `#section-id` via `scrollToSection()` in `src/utils/scrollToSection.js`, which targets `#${id}-head`, then `#${id}-title`, then the section element, offset by the live-measured header height.
+
+**Down-arrow navigation (`SlideContinue` → `ScrollCue`):** A chevron button placed after slide content. Rules are defined in `src/data/slides.js`:
+
+| Slide           | Down arrow |
+|-----------------|------------|
+| Welcome         | Yes → How it works |
+| How it works    | Yes → Our promise |
+| Our promise     | Yes → Discover (scroll + focus questionnaire) |
+| Discover        | No while answering or thinking; when ready, use **See your picks** only |
+| Picked for you  | Yes → Gems (only after recommendations are revealed) |
+| Worth Discovering | Yes → Contact |
+| Contact         | No |
+
+Scroll-spy in `useActiveSection` highlights the current section in the header.
+
+---
+
+## Responsive strategy
+
+Styles live in two files (loaded from `main.jsx`):
+
+- **`src/styles/globals.css`** — design tokens, component styles, slide layouts
+- **`src/styles/responsive.css`** — breakpoint overrides
+
+Breakpoints:
+
+- **≤900px** — hamburger menu, adjusted slide padding
+- **≤720px** — tighter padding, hero single-column, discovery slideshow hidden, mobile modal sheet
+- **≥1100px** — roomier slide padding; curated cards become a 3-column grid when viewport height ≥720px
+
+Slides use `min-height: 100dvh` and grow naturally if content is taller.
 
 ---
 
@@ -60,17 +115,15 @@ All recommendation logic runs in the browser. Results are deterministic for a gi
 
 ## Technology stack
 
-
 | Layer       | Choice                                             |
 | ----------- | -------------------------------------------------- |
 | UI          | React 19                                           |
 | Build       | Vite 8                                             |
-| Styling     | Plain CSS (`src/styles/globals.css`)               |
+| Styling     | Plain CSS (`globals.css` + `responsive.css`)       |
 | Icons       | lucide-react                                       |
 | Persistence | `localStorage`, `sessionStorage`                   |
 | Analytics   | `@vercel/analytics`                                |
 | Routing     | `history.pushState` + `popstate` (no React Router) |
-
 
 ---
 
@@ -79,29 +132,32 @@ All recommendation logic runs in the browser. Results are deterministic for a gi
 ```
 src/
 ├── App.jsx                 # Route switch + Vercel Analytics
-├── main.jsx                # Entry point
+├── main.jsx                # Entry point (loads globals.css + responsive.css)
 ├── components/             # UI components
-│   ├── DiscoveryPanel.jsx  # Five-step questionnaire
-│   ├── MatchesStage.jsx    # “Picked for you” section
-│   ├── GemsStage.jsx       # “Worth Discovering” section
-│   ├── EventCard.jsx       # Recommendation card
-│   ├── EventDetailModal.jsx
+│   ├── Hero.jsx            # Welcome slide
+│   ├── CuratedSection.jsx  # How it works
+│   ├── TrustSection.jsx    # Our promise
+│   ├── DiscoveryPanel.jsx  # Questionnaire
+│   ├── MatchesStage.jsx    # Picked for you
+│   ├── GemsStage.jsx       # Worth Discovering
+│   ├── FooterSection.jsx   # Contact / footer
+│   ├── SlideContinue.jsx   # Down-arrow next-section control
 │   ├── MatchesCarousel.jsx / GemsCarousel.jsx
 │   └── …
 ├── pages/                  # HomePage + static pages
-├── state/                  # React hooks (intent, interactions, story deck, carousel)
-├── services/
-│   ├── matchingEngine.js   # Weighted scoring + ranking
-│   ├── learningEngine.js   # Similarity-based learning boost
-│   └── interactionStore.js # localStorage interaction log
+├── state/                  # React hooks (intent, interactions, carousel)
+├── hooks/                  # useActiveSection, useAppRoute
+├── services/               # matchingEngine, learningEngine, interactionStore
 ├── data/
-│   ├── events.js           # Curated experience dataset (~20 events)
-│   └── siteImages.js       # Image paths and alt text
-├── utils/                  # Routing, discovery options, scroll, progress
+│   ├── slides.js           # Slide map + navigation metadata
+│   ├── events.js           # Curated experience dataset
+│   └── siteImages.js
+├── utils/                  # scrollToSection, discovery options, progress
 └── styles/
-    └── globals.css         # Global styles and design tokens
+    ├── globals.css
+    └── responsive.css
 public/
-└── images/                 # Static image assets
+└── images/
 ```
 
 ---
@@ -119,14 +175,12 @@ Open the URL shown in the terminal (typically `http://localhost:5173`).
 
 ### Scripts
 
-
 | Command           | Description                      |
 | ----------------- | -------------------------------- |
 | `npm run dev`     | Start Vite dev server            |
 | `npm run build`   | Production build to `dist/`      |
 | `npm run preview` | Preview production build locally |
 | `npm run lint`    | Run ESLint                       |
-
 
 ---
 
@@ -139,7 +193,7 @@ Typical Vercel deployment:
 1. Connect the repository
 2. Build command: `npm run build`
 3. Output directory: `dist`
-4. Enable Web Analytics in the Vercel project dashboard (Analytics component uses `mode="production"`)
+4. Enable Web Analytics in the Vercel project dashboard
 
 Client-side routes (`/contact`, `/privacy`, `/terms`, `/partner`) require SPA fallback to `index.html` on the host.
 
@@ -147,14 +201,12 @@ Client-side routes (`/contact`, `/privacy`, `/terms`, `/partner`) require SPA fa
 
 ## Persistence
 
-
 | Key                            | Storage          | Purpose                                                    |
 | ------------------------------ | ---------------- | ---------------------------------------------------------- |
 | `doDifferent_intent`           | `localStorage`   | User discovery intent (mood, when, distance, with, budget) |
 | `doDifferent_interactions`     | `localStorage`   | Interaction log (love, dismiss, tell_more, rail_view)      |
 | `doDifferent_discovery_step`   | `sessionStorage` | Current questionnaire step (per tab)                       |
 | `doDifferent_matches_revealed` | `sessionStorage` | Whether user has revealed recommendations this session     |
-
 
 ---
 
@@ -176,14 +228,13 @@ Client-side routes (`/contact`, `/privacy`, `/terms`, `/partner`) require SPA fa
 - Real per-event imagery in the detail modal (placeholder image used)
 - Server-side analytics or event pipeline
 - Search, maps, or geolocation
+- Automated tests
 
 ---
 
 ## Images and third-party assets
 
 Photography in `public/images/` is sourced from [Pixabay](https://pixabay.com) under the [Pixabay Content License](https://pixabay.com/service/license/). These assets are used **for MVP and demonstration purposes only** and are intended to be replaced with original or commercially licensed imagery before a production release.
-
-This does not change the repository [LICENSE](./LICENSE): application code and Do Different™ branding remain all rights reserved. Image rights are governed by Pixabay’s terms.
 
 ---
 
@@ -197,4 +248,4 @@ This is a personal product-lab MVP. Issues and suggestions are welcome, but ther
 
 All rights reserved. See [LICENSE](./LICENSE).
 
-This repository is public for portfolio and demonstration purposes only. No license is granted to use, copy, modify, or distribute the code or materials without prior written permission from Curiosity in Motion (Do Different™).
+This repository is public for portfolio and demonstration purposes only.

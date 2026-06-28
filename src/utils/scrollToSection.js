@@ -11,7 +11,7 @@ export function readScrollOffset() {
 }
 
 /** Scrolls so the slide head (icon + title), title, or section top sits below the sticky header. */
-export function scrollToSection(targetId, behavior = 'smooth', _scrollerRef = null) {
+export function scrollToSection(targetId, behavior = 'smooth') {
   const headTarget = document.getElementById(`${targetId}-head`);
   const titleTarget = document.getElementById(`${targetId}-title`);
   const target = headTarget ?? titleTarget ?? document.getElementById(targetId);

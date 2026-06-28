@@ -37,7 +37,6 @@
   --color-brand-tagline: #8c8578;
   --color-brand-tagline-hover: #6f695f;
   --section-padding-y: clamp(3.5rem, 8vh, 6rem);
-  --slide-min-height: 100svh;
   --slide-pad-block: clamp(1.25rem, 3vh, 2rem);
   --transition-fade: 400ms ease-in-out;
 }
@@ -147,18 +146,6 @@ a {
   overflow: visible;
 }
 
-.story-stage--matches .story-stage__inner {
-  width: 100%;
-  max-width: var(--max-width);
-  overflow: visible;
-}
-
-.story-stage--matches .story-stage__body {
-  width: 100%;
-  text-align: left;
-  overflow: visible;
-}
-
 .matches-stage__header {
   flex-shrink: 0;
   width: 100%;
@@ -224,25 +211,6 @@ a {
   overflow: visible;
 }
 
-.story-stage--gems .story-stage__inner {
-  width: 100%;
-  max-width: var(--max-width);
-  overflow: visible;
-}
-
-.story-stage--gems .story-stage__body {
-  width: 100%;
-  text-align: left;
-  overflow: visible;
-}
-
-.story-stage__inner {
-  width: 100%;
-  max-width: 28rem;
-  margin: 0 auto;
-  text-align: center;
-}
-
 .story-stage__icon {
   display: inline-flex;
   align-items: center;
@@ -263,20 +231,6 @@ a {
   line-height: 1.2;
   letter-spacing: -0.02em;
   color: var(--color-text);
-}
-
-.story-stage__lead {
-  margin: 0 0 1rem;
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  line-height: 1.6;
-  color: var(--color-text-muted);
-}
-
-.story-stage__support {
-  margin: 0;
-  font-size: 0.9375rem;
-  line-height: 1.65;
-  color: var(--color-text-subtle);
 }
 
 /* Buttons */
@@ -990,65 +944,6 @@ a {
 
 .discovery-deck__story .discovery__sentence {
   text-align: center;
-}
-
-/* Story pagination */
-
-.story-pagination {
-  display: none;
-}
-
-.story-pagination__list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.story-pagination__dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  padding: 0;
-  pointer-events: auto;
-  background: var(--color-border-strong);
-  border: none;
-  border-radius: 999px;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background-color 0.2s ease,
-    height 0.2s ease;
-}
-
-.story-pagination__dot--active {
-  height: 1.35rem;
-  background: var(--color-accent);
-}
-
-.story-pagination__dot:hover {
-  background: var(--color-warm);
-}
-
-.story-pagination__dot:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 3px;
-}
-
-.story-stage__prose {
-  text-align: center;
-}
-
-.story-stage__prose p {
-  margin: 0 0 1.25rem;
-  font-size: clamp(1rem, 2.4vw, 1.1rem);
-  line-height: 1.75;
-  color: var(--color-text-muted);
-}
-
-.story-stage__prose p:last-child {
-  margin-bottom: 0;
 }
 
 .story-stage--transition .scroll-cue {

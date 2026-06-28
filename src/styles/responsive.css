@@ -247,30 +247,10 @@
   }
 }
 
-/* Full-width stages for interactive content */
-.story-stage--discovery .story-stage__inner,
-.story-stage--matches .story-stage__inner,
-.story-stage--gems .story-stage__inner {
-  max-width: 100%;
-}
-
 /* Desktop — roomier slide padding */
 @media (min-width: 1100px) {
   :root {
     --slide-pad-block: clamp(1.35rem, 3.25vh, 2.25rem);
-  }
-}
-
-/* Desktop enhancements */
-@media (min-width: 901px) {
-  .story-stage__inner {
-    max-width: 32rem;
-  }
-
-  .story-stage--discovery .story-stage__inner,
-  .story-stage--matches .story-stage__inner,
-  .story-stage--gems .story-stage__inner {
-    max-width: 100%;
   }
 }
 

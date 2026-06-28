@@ -3,6 +3,7 @@ import MatchesCarousel from './MatchesCarousel';
 import EmptyState from './EmptyState';
 import DiscoveryPromptState from './DiscoveryPromptState';
 import SlideContinue from './SlideContinue';
+import { shouldShowSlideContinue } from '../data/sectionNav';
 
 export default function MatchesStage({
   recommendationsRevealed,
@@ -60,7 +61,7 @@ export default function MatchesStage({
 
         <div className="matches-stage__body">{content}</div>
 
-        {recommendationsRevealed && (
+        {shouldShowSlideContinue('matches', { recommendationsRevealed }) && (
           <SlideContinue nextLabel="Gems" nextId="gems" />
         )}
       </div>

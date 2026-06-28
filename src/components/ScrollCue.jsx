@@ -7,7 +7,6 @@ export default function ScrollCue({
   label = 'next section',
   inline = false,
   className = '',
-  scrollerRef = null,
   onNavigate = null,
 }) {
   const handleClick = () => {
@@ -16,7 +15,7 @@ export default function ScrollCue({
       return;
     }
 
-    scrollToSection(targetId, 'smooth', scrollerRef);
+    scrollToSection(targetId, 'smooth');
   };
 
   return (
