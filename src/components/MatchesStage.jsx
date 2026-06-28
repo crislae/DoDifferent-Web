@@ -42,18 +42,20 @@ export default function MatchesStage({
   return (
     <section
       id="matches"
-      className="story-stage story-stage--matches story-stage--band story-stage--content-start"
+      className="story-stage story-stage--matches story-stage--band"
       aria-label="Slide 5: For you"
       aria-labelledby="matches-title"
     >
       <div className="matches-stage slide-shell">
         <header id="matches-head" className="matches-stage__header">
-          <div className="story-stage__icon" aria-hidden="true">
-            <Star size={28} strokeWidth={1.5} />
+          <div className="matches-stage__title-row">
+            <div className="matches-stage__icon" aria-hidden="true">
+              <Star size={22} strokeWidth={1.5} />
+            </div>
+            <h2 id="matches-title" className="story-stage__title">
+              Picked for you
+            </h2>
           </div>
-          <h2 id="matches-title" className="story-stage__title">
-            Picked for you
-          </h2>
         </header>
 
         <div className="matches-stage__body">{content}</div>

@@ -16,7 +16,6 @@ import {
 } from '../utils/discoveryProgress';
 import DiscoveryThinking from './DiscoveryThinking';
 import DiscoveryRevealPrompt from './DiscoveryRevealPrompt';
-import SlideContinue from './SlideContinue';
 import ImageSlideshow from './ImageSlideshow';
 import { DISCOVERY_SLIDESHOW_IMAGES } from '../data/siteImages';
 
@@ -219,7 +218,7 @@ export default function DiscoveryPanel({
 
   return (
     <section
-      className={`story-stage story-stage--discovery${isFlowComplete ? ' story-stage--content-start' : ''}`}
+      className="story-stage story-stage--discovery"
       aria-label="Slide 4: Discover"
       id="discovery"
     >
@@ -280,14 +279,6 @@ export default function DiscoveryPanel({
             )}
           </div>
         </div>
-
-        {phase === 'ready' && (
-          <SlideContinue
-            nextLabel="For you"
-            nextId="matches"
-            onNavigate={onViewResults}
-          />
-        )}
       </div>
     </section>
   );

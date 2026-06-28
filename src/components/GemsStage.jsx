@@ -13,7 +13,7 @@ export default function GemsStage({
   return (
     <section
       id="gems"
-      className="story-stage story-stage--gems story-stage--band story-stage--content-start"
+      className="story-stage story-stage--gems story-stage--band"
       aria-label="Slide 6: Gems"
       aria-labelledby="gems-title"
     >

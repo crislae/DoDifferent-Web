@@ -39,8 +39,6 @@
   --section-padding-y: clamp(3.5rem, 8vh, 6rem);
   --slide-min-height: 100svh;
   --slide-pad-block: clamp(1.25rem, 3vh, 2rem);
-  --slide-continue-gap: clamp(0.75rem, 2.5vh, 1.5rem);
-  --slide-continue-bottom: 0.5rem;
   --transition-fade: 400ms ease-in-out;
 }
 
@@ -124,7 +122,7 @@ a {
   justify-content: flex-start;
   box-sizing: border-box;
   width: 100%;
-  min-height: var(--slide-min-height);
+  min-height: 100svh;
   min-height: 100dvh;
   padding: var(--slide-pad-block) var(--page-gutter);
   overflow: visible;
@@ -132,36 +130,16 @@ a {
 
 .slide-shell {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
+  gap: clamp(1.25rem, 3vh, 2rem);
   width: 100%;
   max-width: var(--max-width);
-  min-height: 0;
   margin: 0 auto;
-}
-
-.story-stage > .slide-shell {
-  flex: 1 1 auto;
-}
-
-.story-stage > .deck-footer {
-  flex: 0 1 auto;
-  width: 100%;
-  min-height: 0;
 }
 
 .story-stage--band {
   background: var(--color-surface);
   border-block: 1px solid var(--color-border);
-}
-
-.story-stage--content-start {
-  justify-content: flex-start;
-  align-items: stretch;
-}
-
-.story-stage--content-start > .slide-shell {
-  flex: 1 1 auto;
 }
 
 .story-stage--matches {
@@ -189,23 +167,36 @@ a {
   text-align: center;
 }
 
+.matches-stage__title-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+}
+
+.matches-stage__icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+  border-radius: 50%;
+}
+
 .matches-stage__header .story-stage__title {
-  margin-bottom: clamp(1rem, 2.5vh, 1.5rem);
+  margin: 0 0 clamp(1rem, 2.5vh, 1.5rem);
+  text-align: left;
 }
 
 .matches-stage__body {
-  flex: 1 1 auto;
   width: 100%;
-  min-height: 0;
 }
 
 .gems-stage {
   gap: clamp(0.85rem, 2vh, 1.25rem);
-}
-
-.gems-stage > .matches-carousel {
-  flex: 1 1 auto;
-  min-height: 0;
 }
 
 .gems-stage__header {
@@ -370,12 +361,10 @@ a {
 
 .hero-deck__main {
   display: grid;
-  flex: 1 1 auto;
   grid-template-columns: minmax(0, 34rem) minmax(0, 1fr);
   align-items: flex-start;
   gap: clamp(2rem, 4vw, 3.5rem);
   width: 100%;
-  min-height: 0;
 }
 
 .hero-deck__copy {
@@ -468,14 +457,11 @@ a {
 
 .slide-continue {
   display: flex;
-  flex: 0 0 auto;
   flex-direction: column;
   align-items: center;
   gap: 0.75rem;
   width: 100%;
-  margin-top: auto;
-  padding-top: var(--slide-continue-gap);
-  padding-bottom: max(var(--slide-continue-bottom), env(safe-area-inset-bottom, 0px));
+  padding-top: clamp(1rem, 2.5vh, 1.5rem);
 }
 
 .slide-continue__hint {
@@ -536,16 +522,11 @@ a {
 
 .curated-deck__body {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   gap: clamp(1.25rem, 3vh, 2rem);
   width: 100%;
-  min-height: 0;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 .curated-deck__header {
@@ -762,12 +743,17 @@ a {
 
 .transition-deck__content {
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
-  min-height: 0;
+  min-height: min(100%, 28rem);
+  padding-block: clamp(1rem, 4vh, 3rem);
+}
+
+.story-stage--transition .slide-shell {
+  min-height: calc(100dvh - 2 * var(--slide-pad-block));
+  justify-content: center;
 }
 
 .transition-deck__title {
@@ -800,12 +786,10 @@ a {
 .discovery-deck {
   --discovery-deck-gap: clamp(1.75rem, 3.5vh, 2.5rem);
   display: flex;
-  flex: 1 1 auto;
   flex-direction: column;
   align-items: center;
   gap: var(--discovery-deck-gap);
   width: 100%;
-  min-height: 0;
   margin: 0 auto;
   text-align: center;
 }
